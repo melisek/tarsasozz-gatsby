@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, featured }) => {
     const url = `/${post.slug}/`
     const readingTime = readingTimeHelper(post)
 
@@ -15,11 +15,16 @@ const PostCard = ({ post }) => {
                     <div className="post-card-image" style={{
                         backgroundImage: `url(${post.feature_image})` ,
                     }}></div>}
-                {post.tags && <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div>}
-                {post.featured && <span>Featured</span>}
-                <h2 className="post-card-title">{post.title}</h2>
+                <div className="post-card-head">
+                    {post.tags && <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div>}
+                    <h2 className="post-card-title">{post.title}</h2>
+                </div>
             </header>
-            <section className="post-card-excerpt">{post.excerpt}</section>
+            {
+                featured
+                ? <section className="post-card-excerpt">{post.custom_excerpt}</section> 
+                : null
+            }
             <footer className="post-card-footer">
                 <div className="post-card-footer-left">
                     <div className="post-card-avatar">
@@ -31,7 +36,6 @@ const PostCard = ({ post }) => {
                     <span>{ post.primary_author.name }</span>
                 </div>
                 <div className="post-card-footer-right">
-                    <div>{readingTime}</div>
                 </div>
             </footer>
         </Link>

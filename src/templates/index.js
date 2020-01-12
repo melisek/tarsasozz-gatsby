@@ -14,7 +14,15 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Index = ({ data, location, pageContext }) => {
-    const posts = data.allGhostPost.edges
+
+    const featuredPost = data.allGhostPost.edges.find(p => {
+        return (p.node.featured);
+    });
+
+    const posts = data.allGhostPost.edges.filter(p => {
+        console.log(p.node);
+        return (p.node.id !== featuredPost.node.id);
+    });
 
     return (
         <>
@@ -22,6 +30,9 @@ const Index = ({ data, location, pageContext }) => {
             <Layout isHome={true}>
                 <div className="container">
                     <section className="post-feed">
+                        <div class="post-card-featured">
+                            <PostCard key={featuredPost.node.id} post={featuredPost.node} featured={true} />
+                        </div>
                         {posts.map(({ node }) => (
                             // The tag below includes the markup for each post - components/common/PostCard.js
                             <PostCard key={node.id} post={node} />
