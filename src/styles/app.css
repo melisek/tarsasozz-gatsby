@@ -787,11 +787,23 @@ h6 {
 @media (max-width: 980px) {
     .post-feed {
         grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "last_post ."
+        ". ."
+        ". ."
+        ". ."
+        ". .";
     }
 }
 @media (max-width: 680px) {
     .post-feed {
         grid-template-columns: 1fr;
+        grid-template-areas:
+            "last_post"
+            "."
+            "."
+            "."
+            ".";
     }
 }
 
