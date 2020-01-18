@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
-
+import { Tags } from '@tryghost/helpers-gatsby'
 /**
 * Single post view (/:slug)
 *
@@ -13,8 +13,12 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Post = ({ data, location }) => {
-    const post = data.ghostPost
-
+    const post = data.ghostPost;
+    const public_tags = post.tags.filter(t => {
+        return t.visibility === "public"
+    });
+    console.log(public_tags);
+    console.log(post);
     return (
         <>
             <MetaData
@@ -34,6 +38,28 @@ const Post = ({ data, location }) => {
                             </figure> : null }
                         <section className="post-full-content">
                             <h1 className="content-title">{post.title}</h1>
+
+                            <div class="content-header">
+                                <div class="content-tags">
+                                    {public_tags.map((tag, i) => {     
+                                        return (
+                                            <a href={`/tag/${tag.slug}`} title={tag.meta_title}>
+                                                {tag.name}
+                                            </a>
+                                        ) 
+                                    })}
+                                </div>
+
+                                &bull;
+
+                                <div class="content-published-date">
+                                    {new Intl.DateTimeFormat("hu-HU", {
+                                        year: "numeric",
+                                        month: "numeric",
+                                        day: "2-digit"
+                                    }).format(new Date(post.published_at))}
+                                </div>
+                            </div>   
 
                             {/* The main post content */ }
                             <section

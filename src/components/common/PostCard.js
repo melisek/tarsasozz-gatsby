@@ -11,6 +11,7 @@ const PostCard = ({ post, featured }) => {
     return (
         <Link to={url} className="post-card">
             <header className="post-card-header">
+
                 {post.feature_image &&
                     <div className="post-card-image" style={{
                         backgroundImage: `url(${post.feature_image})` ,
@@ -25,7 +26,7 @@ const PostCard = ({ post, featured }) => {
                 ? <section className="post-card-excerpt">{post.custom_excerpt}</section> 
                 : null
             }
-            <footer className="post-card-footer">
+            {/* <footer className="post-card-footer">
                 <div className="post-card-footer-left">
                     <div className="post-card-avatar">
                         {post.primary_author.profile_image ?
@@ -37,7 +38,7 @@ const PostCard = ({ post, featured }) => {
                 </div>
                 <div className="post-card-footer-right">
                 </div>
-            </footer>
+            </footer> */}
         </Link>
     )
 }
