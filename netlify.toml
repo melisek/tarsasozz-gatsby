@@ -4,3 +4,9 @@
 
 [template]
   incoming-hooks = ["Ghost"]
+
+[[redirects]]
+  from = "https://tarsasozz.netlify.com"
+  to = "https://tarsasozz.blog"
+  status = 301
+  force = true
