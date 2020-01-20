@@ -6,6 +6,7 @@ import Helmet from 'react-helmet'
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 import { Tags } from '@tryghost/helpers-gatsby'
+import AuthorCard from '../components/common/AuthorCard'
 /**
 * Single post view (/:slug)
 *
@@ -66,8 +67,15 @@ const Post = ({ data, location }) => {
                                 className="content-body load-external-scripts"
                                 dangerouslySetInnerHTML={{ __html: post.html }}
                             />
+
                         </section>
+
                     </article>
+
+                    <section className="content-author">
+                        <AuthorCard author={post.primary_author} />
+                    </section>
+                    
                 </div>
             </Layout>
         </>

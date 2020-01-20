@@ -808,6 +808,35 @@ figure.kg-card-hascaption > figcation {
     background-color: var(--color-bg);
 }
 
+.content-author {
+    margin: 0 auto;
+    width: 500px;
+}
+
+.author-card {
+    background-color: #fff;
+    margin: 60px auto;
+    text-align: center;
+    width: 500px;
+}
+.author-card .content-author-image {
+    width: 70px;
+    height: 70px;
+    background-position: top center;
+    background-size: cover;
+    border-radius: 50%;
+    margin: -35px auto 30px;
+}
+.author-card a:hover {
+    text-decoration:none
+}
+
+@media (max-width: 680px) {
+    .content-author,.author-card {
+        width:100%
+    }
+}
+
 /* Index
 /* ---------------------------------------------------------- */
 
@@ -850,7 +879,7 @@ figure.kg-card-hascaption > figcation {
     }
 }
 
-.post-card {
+.post-card, .author-card {
     color: inherit;
     text-decoration: none;
 
