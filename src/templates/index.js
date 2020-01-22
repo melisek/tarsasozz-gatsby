@@ -30,7 +30,7 @@ const Index = ({ data, location, pageContext }) => {
             <Layout isHome={true}>
                 <div className="container">
                     <section className="post-feed">
-                        <div class="post-card-featured">
+                        <div className="post-card-featured">
                             <PostCard key={featuredPost.node.id} post={featuredPost.node} featured={true} />
                         </div>
                         {posts.map(({ node }) => (

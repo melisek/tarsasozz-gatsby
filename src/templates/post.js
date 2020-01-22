@@ -56,7 +56,7 @@ const Post = ({ data, location }) => {
                                 <div class="content-published-date">
                                     {new Intl.DateTimeFormat("hu-HU", {
                                         year: "numeric",
-                                        month: "numeric",
+                                        month: "2-digit",
                                         day: "2-digit"
                                     }).format(new Date(post.published_at))}
                                 </div>
