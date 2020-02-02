@@ -12,10 +12,12 @@ const PostCard = ({ post, featured }) => {
         <Link to={url} className="post-card">
             <header className="post-card-header">
 
-                {post.feature_image &&
+                {
+                    post.feature_image &&
                     <div className="post-card-image" style={{
                         backgroundImage: `url(${post.feature_image})` ,
-                    }}></div>}
+                    }}></div>
+                }
                 <div className="post-card-head">
                     {post.tags && <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div>}
                     <h2 className="post-card-title">{post.title}</h2>

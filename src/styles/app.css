@@ -546,9 +546,14 @@ h6 {
 }
 
 .post-full-content {
-    max-width: 720px;
+    max-width: 75%;
     margin: 0 auto;
     background: #fff;
+}
+
+.featured-page-full-content {
+    max-width: 85%;
+    margin: 0 auto;
 }
 
 @media (max-width: 800px) {
@@ -890,12 +895,40 @@ figure.kg-card-hascaption > figcaption {
     background-color: var(--color-bg);
 }
 
-.content-author {
-    margin: 0 auto;
-    width: 500px;
+.kg-gallery-row {
+    display: grid;
+    justify-content: space-between;
+    grid-gap: 30px;
+    grid-template-columns: repeat(2,1fr);
 }
 
-.author-card {
+.post-footer {
+    display: grid;
+    justify-content: space-between;
+    grid-gap: 30px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    /*grid-template-areas:
+        "last_post last_post ."
+        ". . ."
+        ". . ."
+        ". . .";*/
+}
+
+@media (max-width: 680px) {
+    .post-footer {
+        grid-template-columns: 1fr;
+    }
+}
+
+.featured-page-item {
+    margin-top: 60px;
+}
+
+.page-card-image {
+    height: 50px;
+}
+
+.author-card, .featured-page-card {
     background-color: #fff;
     margin: 60px auto;
     text-align: center;
@@ -928,7 +961,7 @@ figure.kg-card-hascaption > figcaption {
     grid-gap: 30px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-    "last_post last_post ."
+    "last_post last_post last_post"
     ". . ."
     ". . ."
     ". . .";
@@ -938,11 +971,39 @@ figure.kg-card-hascaption > figcaption {
         grid-area: last_post;
 }
 
+.post-card-featured .post-card-head {
+    padding: 5vw 40px 10px;
+}
+
+/* .post-card-featured .post-card-image {
+
+} */
+
+.post-card-featured .post-card-excerpt {
+    padding: 0 40px 0 40px;
+}
+
+@media (min-width: 681px)
+{
+    .post-card-featured .post-card-image {
+        float: left;
+        width: 50%;
+        height: 320px;
+        margin-right: 40px;
+
+        margin-bottom: 0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 0px;
+    }
+}
+
 @media (max-width: 980px) {
     .post-feed {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
-        "last_post ."
+        "last_post last_post"
         ". ."
         ". ."
         ". ."
@@ -959,9 +1020,13 @@ figure.kg-card-hascaption > figcaption {
             "."
             ".";
     }
+
+    .post-card-featured .post-card-excerpt {
+        padding-bottom:5vw;
+    }
 }
 
-.post-card, .author-card {
+.post-card, .author-card, .featured-page-card {
     color: inherit;
     text-decoration: none;
 
@@ -974,7 +1039,7 @@ figure.kg-card-hascaption > figcaption {
     transition: all .5s;
 }
 
-.post-card:hover {
+.post-card:hover, .author-card:hover, .featured-page-card:hover {
     text-decoration: none;
     -webkit-transform: translate3d(0,-5px,0);
     transform: translate3d(0,-5px,0);
@@ -1001,10 +1066,10 @@ figure.kg-card-hascaption > figcaption {
 .post-card-excerpt {
     font-size: 1.6rem;
     line-height: 1.55em;
-    padding: 35px;
+    padding: 40px;
 }
 
-.post-card-image {
+.post-card-image, .page-card-image {
     margin: 0 0 10px 0;
     width: auto;
     height: 200px;
@@ -1057,6 +1122,55 @@ figure.kg-card-hascaption > figcaption {
     width: 26px;
 }
 
+.page-list {
+    background-color: #fff;
+    border-top: 1px solid #e5eff5;
+    border-bottom: 1px solid #e5eff5;
+    margin-top: 75px;
+    margin-bottom: 75px;
+    text-align: center;
+    padding: 42px 0;
+}
+
+.page-list__container {
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    grid-column-gap: 20px;
+
+    margin: auto;
+    width: 85%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px){
+    .page-list__container {
+        grid-template-columns: repeat(3,1fr);
+        width: 90%;
+    }
+}
+
+.featured-page-grid {
+    display: grid;
+    justify-content: space-between;
+    grid-gap: 30px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+        ". col2 col2"
+        "col3 col3 col3";
+}
+
+.featured-page-grid .col-3 {
+    grid-area: col3;
+}
+
+.featured-page-grid .col-2 {
+    grid-area: col2;
+}
+
+.featured-page-grid .content {
+    margin: 0;
+}
 
 /* Tag Archives
 /* ---------------------------------------------------------- */

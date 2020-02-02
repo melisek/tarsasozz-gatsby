@@ -15,6 +15,10 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         slug
+                        tags {
+                            slug
+                            visibility
+                        }
                     }
                 }
             }
@@ -41,6 +45,11 @@ exports.createPages = async ({ graphql, actions }) => {
                     node {
                         slug
                         url
+                        featured
+                        tags {
+                            slug
+                            visibility
+                        }
                     }
                 }
             }
@@ -157,6 +166,13 @@ exports.createPages = async ({ graphql, actions }) => {
         // a `/:slug/` permalink.
         node.url = `/${node.slug}/`
 
+        let pageTagSlugs = new Array();
+        if (node.featured)
+        {
+            const internalPageTags = node.tags.filter(tag => tag.visibility === "internal");
+            pageTagSlugs = Array.from(internalPageTags, tag => tag.slug);
+        }
+
         createPage({
             path: node.url,
             component: pageTemplate,
@@ -164,6 +180,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
+                tags: pageTagSlugs
             },
         })
     })
@@ -174,6 +191,9 @@ exports.createPages = async ({ graphql, actions }) => {
         // a `/:slug/` permalink.
         node.url = `/${node.slug}/`
 
+        const internalPostTags = node.tags.filter(tag => tag.visibility === "internal");
+        const postTagSlugs = Array.from(internalPostTags, tag => tag.slug);
+
         createPage({
             path: node.url,
             component: postTemplate,
@@ -181,6 +201,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
+                tags: postTagSlugs
             },
         })
     })
