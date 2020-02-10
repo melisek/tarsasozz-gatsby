@@ -28,6 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         slug
                         url
                         postCount
+                        visibility
                     }
                 }
             }
