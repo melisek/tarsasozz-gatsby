@@ -174,6 +174,7 @@ module.exports = {
                     `/404`,
                     `/404.html`,
                     `/offline-plugin-app-shell-fallback`,
+                    /(\/)?hash-\S*/, 
                 ],
                 createLinkInHead: true,
                 addUncaughtPages: true,
