@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-
+import Img from 'gatsby-image'
 
 // Styles
 import '../../styles/app.css'
@@ -17,7 +17,6 @@ import '../../styles/app.css'
 const PageList = ({ data }) => {
     const featuredPages = data.allGhostPage.edges;
 
-    console.log(featuredPages);
     return (
         <>
             <section className="page-list">
@@ -26,7 +25,7 @@ const PageList = ({ data }) => {
 
                     {featuredPages.map(({ node }) => (
                         <a href={node.slug} title={node.title}>
-                            <img src={node.feature_image} alt={node.title} />
+                            <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} />
                         </a>
                     ))}
 
@@ -53,6 +52,7 @@ const PageListQuery = props => (
                     edges {
                         node {
                             ...GhostPageFields
+                            ...GatsbyImageSharpSinglePage
                         }
                     }
                 }

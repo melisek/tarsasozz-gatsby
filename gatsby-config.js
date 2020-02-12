@@ -53,7 +53,15 @@ module.exports = {
                 name: `images`,
             },
         },
-        `gatsby-plugin-sharp`,
+        {
+            resolve: `gatsby-plugin-sharp`, 
+            options: {
+                useMozJpeg: false,
+                stripMetadata: true,
+                defaultQuality: 75,
+                quality: 75
+            },
+        },
         `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-source-ghost`,

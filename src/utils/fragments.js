@@ -131,6 +131,48 @@ export const ghostPostFields = graphql`
     }
 `
 
+// Used for post featured images on post cards
+export const gatsbyImageSharpPostCard = graphql`
+    fragment GatsbyImageSharpPostCard on GhostPost {
+        localFeatureImage {
+            childImageSharp {
+                fluid(
+                    maxWidth: 500
+                    maxHeight: 320
+                    cropFocus: CENTER
+                ) {
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                    base64
+                }
+            }
+        }
+    }
+`
+
+// Used for post featured images on single posts
+export const gatsbyImageSharpSinglePost = graphql`
+    fragment GatsbyImageSharpSinglePost on GhostPost {
+        localFeatureImage {
+            childImageSharp {
+                fluid(
+                    maxWidth: 1200
+                    maxHeight: 700
+                    cropFocus: CENTER
+                ) {
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                    base64
+                }
+            }
+        }
+    }
+`
+
 // Used for single pages
 export const ghostPageFields = graphql`
     fragment GhostPageFields on GhostPage {
@@ -219,6 +261,27 @@ export const ghostPageFields = graphql`
         codeinjection_styles
         comment_id
         reading_time
+    }
+`
+
+// Used for featured images on single pages
+export const gatsbyImageSharpSinglePage = graphql`
+    fragment GatsbyImageSharpSinglePage on GhostPage {
+        localFeatureImage {
+            childImageSharp {
+                fluid(
+                    maxWidth: 400
+                    maxHeight: 400
+                    cropFocus: CENTER
+                ) {
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                    base64
+                }
+            }
+        }
     }
 `
 

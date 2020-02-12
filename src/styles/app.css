@@ -1073,10 +1073,14 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     margin: 0 0 10px 0;
     width: auto;
     height: 200px;
-    background: var(--color-secondary) no-repeat center center;
+    background: #fff no-repeat center center;
     background-size: cover;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+.post-card-image {
+    overflow: hidden
 }
 
 .post-card-footer {

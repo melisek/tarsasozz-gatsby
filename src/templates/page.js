@@ -6,6 +6,7 @@ import Helmet from 'react-helmet'
 import { Layout } from '../components/common'
 import PostCard from '../components/common/PostCard'
 import { MetaData } from '../components/common/meta'
+import Img from 'gatsby-image'
 
 /**
 * Single page (/:slug)
@@ -16,6 +17,8 @@ import { MetaData } from '../components/common/meta'
 const Page = ({ data, location }) => {
     const page = data.ghostPage;
     const relatedPosts = data.allGhostPost.edges;
+    const featuredImage = data.ghostPage.localFeatureImage.childImageSharp.fluid;
+
     return (
         <>
             <MetaData
@@ -31,7 +34,7 @@ const Page = ({ data, location }) => {
                     { page.featured ? 
                         <section class="featured-page-grid">
                             <figure className="post-feature-image">
-                                <img src={ page.feature_image } alt={ page.title } />
+                                <Img fluid={featuredImage} alt={page.title} />
                             </figure> 
 
                             <article className="content col-2">
@@ -101,6 +104,7 @@ export const postQuery = graphql`
     query($slug: String!, $tags: [String!]) {
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
+            ...GatsbyImageSharpSinglePage
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
@@ -109,7 +113,8 @@ export const postQuery = graphql`
         ) {
           edges {
             node {
-              ...GhostPostFields
+                ...GhostPostFields
+                ...GatsbyImageSharpPostCard
             }
           }
         }
