@@ -238,18 +238,21 @@ exports.onCreateNode = async ({
 
     const { createNode } = actions;
 
-    // Download image and create a File node with gatsby-transformer-sharp.
-    const fileNode = await createRemoteFileNode({
-        url: node.feature_image,
-        store,
-        cache,
-        createNode,
-        parentNodeId: node.id,
-        createNodeId
-    });
+    if (node.feature_image) 
+    {
+        // Download image and create a File node with gatsby-transformer-sharp.
+        const fileNode = await createRemoteFileNode({
+            url: node.feature_image,
+            store,
+            cache,
+            createNode,
+            parentNodeId: node.id,
+            createNodeId
+        });
 
-    if (fileNode) {
-        // Link File node to GhostPost node at field image.
-        node.localFeatureImage___NODE = fileNode.id;
+        if (fileNode) {
+            // Link File node to GhostPost node at field image.
+            node.localFeatureImage___NODE = fileNode.id;
+        }
     }
 };
