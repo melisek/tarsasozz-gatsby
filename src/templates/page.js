@@ -17,7 +17,7 @@ import Img from 'gatsby-image'
 const Page = ({ data, location }) => {
     const page = data.ghostPage;
     const relatedPosts = data.allGhostPost.edges;
-    const featuredImage = data.ghostPage.localFeatureImage?.childImageSharp.fluid;
+    const featuredImage = data.ghostPage.localFeatureImage ? data.ghostPage.localFeatureImage.childImageSharp.fluid : null;
 
     return (
         <>
