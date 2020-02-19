@@ -3,10 +3,11 @@ const path = require(`path`)
 const config = require(`./src/utils/siteConfig`)
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 
-let ghostConfig
+let ghostConfig, bggConfig, bggEnv
 
 try {
     ghostConfig = require(`./.ghost`)
+    bggConfig = require(`./.bgg`)
 } catch (e) {
     ghostConfig = {
         production: {
@@ -14,8 +15,15 @@ try {
             contentApiKey: process.env.GHOST_CONTENT_API_KEY,
         },
     }
+    bggConfig = {
+        production: {
+            apiUrl: process.env.BGG_API_URL,
+            username: process.env.BGG_API_USERNAME,
+        },
+    }
 } finally {
     const { apiUrl, contentApiKey } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production
+    bggEnv = process.env.NODE_ENV === `development` ? bggConfig.development : bggConfig.production
 
     if (!apiUrl || !contentApiKey || contentApiKey.match(/<key>/)) {
         throw new Error(`GHOST_API_URL and GHOST_CONTENT_API_KEY are required to build. Check the README.`) // eslint-disable-line
@@ -61,6 +69,26 @@ module.exports = {
                 defaultQuality: 75,
                 quality: 75
             },
+        },
+        {
+            resolve: "gatsby-source-apiserver",
+            options: {
+              // Type prefix of entities from server
+              typePrefix: "internal__",
+        
+              // The url, this should be the endpoint you are attempting to pull data from
+              url: `${bggEnv.apiUrl}plays/${bggEnv.username}/`,
+        
+              method: "get",
+        
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              name: `plays`,
+
+              verboseOutput: true,
+            }
         },
         `gatsby-transformer-sharp`,
         {

@@ -6,14 +6,6 @@ import Img from 'gatsby-image'
 // Styles
 import '../../styles/app.css'
 
-/**
-* Main layout component
-*
-* The Layout component wraps around each page and template.
-* It also provides the header, footer as well as the main
-* styles, and meta data for each page.
-*
-*/
 const PageList = ({ data }) => {
     const featuredPages = data.allGhostPage.edges;
 
@@ -24,7 +16,7 @@ const PageList = ({ data }) => {
                 <div className="page-list__container">
 
                     {featuredPages.map(({ node }) => (
-                        <a href={node.slug} title={node.title}>
+                        <a href={node.slug} title={node.title} key={node.id}>
                             <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} />
                         </a>
                     ))}
