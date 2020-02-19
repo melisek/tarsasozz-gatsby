@@ -800,6 +800,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     background: var(--color-bg);
     background-position: center;
     background-size: cover;
+    background-image: url("/images/bg1.svg");
 }
 
 .site-nav-item {
@@ -840,10 +841,37 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 }
 
 .site-banner {
-    max-width: 80%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 10vw 0;
+    padding: 0;
     text-align: center;
+
+}
+
+.site-banner-categories {
+    display: grid;
+    justify-content: space-between;
+    grid-gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.site-banner-category {
+    background-size: 300px;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 250px;
+}
+
+.site-banner-category#csaladi {
+    background-image: url("/images/csaladi.svg");
+}
+
+.site-banner-category#party {
+    background-image: url("/images/party.svg");
+}
+
+.site-banner-category#strategiai {
+    background-image: url("/images/strategiai.svg");
 }
 
 .site-banner-title {
@@ -893,6 +921,8 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-main {
     background-color: var(--color-bg);
+    background-size: 300px;
+    background-image: url(/images/geo7.jpg);
 }
 
 .kg-gallery-row {

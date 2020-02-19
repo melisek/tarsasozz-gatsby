@@ -34,8 +34,8 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
             <div className="viewport">
 
                 <div className="viewport-top">
-                    {/* The main header section on top of the screen */}
-                    <header className="site-head" style={isHome? { ...site.cover_image && { backgroundImage: `url(${site.cover_image})`, height: `300px` } } : {} }>
+                    {/* The main header section on top of the screen  ${site.cover_image} */}
+                    <header className="site-head" style={isHome? { ...site.cover_image && { height: `450px` } } : {} }>
                         <div className="container">
                             <div className="site-mast">
                                 <div className="site-mast-left">
@@ -65,13 +65,19 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                     <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a> */}
                                 </div>
                             </div>
-                            {/* { isHome ?
+                            { isHome ?
                                 <div className="site-banner">
                                     <h1 className="site-banner-title">{site.title}</h1>
                                     <p className="site-banner-desc">{site.description}</p>
+                                    <div className="site-banner-categories">
+                                        <div className="site-banner-category" id="csaladi"></div>
+                                        <div className="site-banner-category" id="strategiai"></div>
+                                        <div className="site-banner-category" id="party"></div>
+                                        
+                                    </div>
                                 </div> :
-                                null} */}
-
+                                null
+                                }
                         </div>
                     </header>
 
