@@ -62,6 +62,19 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-transformer-json`,
+            options: {
+                typeName: `Games`
+            }
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+              name: `games`,
+              path: path.join(__dirname, `src`, `games`),
+            },
+        },
+        {
             resolve: `gatsby-plugin-sharp`, 
             options: {
                 useMozJpeg: false,

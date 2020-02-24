@@ -15,8 +15,8 @@ const PageList = ({ data }) => {
                 <h2>Kiemelt társasjátékok</h2>
                 <div className="page-list__container">
 
-                    {featuredPages.map(({ node }) => (
-                        <a href={node.slug} title={node.title} key={node.id}>
+                    {featuredPages.map(({ node, i }) => (
+                        <a href={node.slug} title={node.title} key={i}>
                             <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} />
                         </a>
                     ))}

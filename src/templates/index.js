@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, Pagination, PageList, GamePlays } from '../components/common'
+import { Layout, PostCard, Pagination, PageList, PlayList } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -41,7 +41,7 @@ const Index = ({ data, location, pageContext }) => {
                     <Pagination pageContext={pageContext} />
                 </div>
                 <PageList />
-                <GamePlays />
+                <PlayList />
             </Layout>
         </>
     )
