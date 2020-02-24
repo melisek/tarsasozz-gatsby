@@ -78,3 +78,4 @@ yarn-error.log
 .bgg.json
 package-lock.json
 
+.google-sheets-config.json

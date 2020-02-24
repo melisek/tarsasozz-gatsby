@@ -3,11 +3,12 @@ const path = require(`path`)
 const config = require(`./src/utils/siteConfig`)
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 
-let ghostConfig, bggConfig, bggEnv
+let ghostConfig, bggConfig, googleSheetsConfig, bggEnv
 
 try {
     ghostConfig = require(`./.ghost`)
     bggConfig = require(`./.bgg`)
+    googleSheetsConfig = require(`./.google-sheets-config`)
 } catch (e) {
     ghostConfig = {
         production: {
@@ -21,8 +22,21 @@ try {
             username: process.env.BGG_API_USERNAME,
         },
     }
+    googleSheetsConfig = {
+        type: "service_account",
+        project_id: process.env.GOOGLE_SHEETS_PROJECT_ID,
+        private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
+        private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY,
+        client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+        client_id: process.env.GOOGLE_SHEETS_CLIENT_ID,
+        client_x509_cert_url: process.env.GOOGLE_SHEETS_CLIENT_CERT_URL,
+        auth_uri: "https://accounts.google.com/o/oauth2/auth",
+        token_uri: "https://oauth2.googleapis.com/token",
+        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+        spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID
+    }
 } finally {
-    const { apiUrl, contentApiKey } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production
+    const { apiUrl, contentApiKey } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production;
     bggEnv = process.env.NODE_ENV === `development` ? bggConfig.development : bggConfig.production
 
     if (!apiUrl || !contentApiKey || contentApiKey.match(/<key>/)) {
@@ -62,17 +76,12 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-transformer-json`,
+            resolve: 'gatsby-source-google-sheets',
             options: {
-                typeName: `Games`
+                spreadsheetId: googleSheetsConfig.spreadsheetId,
+                worksheetTitle: 'Games',
+                credentials: googleSheetsConfig
             }
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-              name: `games`,
-              path: path.join(__dirname, `src`, `games`),
-            },
         },
         {
             resolve: `gatsby-plugin-sharp`, 

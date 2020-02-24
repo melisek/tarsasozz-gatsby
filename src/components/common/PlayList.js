@@ -9,7 +9,7 @@ import '../../styles/app.css'
 
 const PlayList = ({ data }) => {
     const plays = data.allInternalPlays.edges
-    const games = data.allGames.edges
+    const games = data.allGoogleSheetGamesRow.edges
     const pages = data.allGhostPage.edges
 
     return (
@@ -36,7 +36,7 @@ const PlayList = ({ data }) => {
 PlayList.propTypes = {
     data: PropTypes.shape({
       allInternalPlays: PropTypes.object.isRequired,
-      allGames: PropTypes.object.isRequired,
+      allGoogleSheetGamesRow: PropTypes.object.isRequired,
       allGhostPage: PropTypes.object.isRequired,
     }).isRequired,
 }
@@ -62,7 +62,7 @@ const PlayListQuery = props => (
                       }
                     }
                 }
-                allGames {
+                allGoogleSheetGamesRow {
                     edges {
                       node {
                         bggId
