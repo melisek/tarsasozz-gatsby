@@ -99,8 +99,6 @@ module.exports = {
               },
 
               name: `plays`,
-
-              verboseOutput: true,
             }
         },
         `gatsby-transformer-sharp`,
