@@ -26,7 +26,7 @@ try {
         type: "service_account",
         project_id: process.env.GOOGLE_SHEETS_PROJECT_ID,
         private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
-        private_key: _.replace(process.env.GOOGLE_SHEETS_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n"),
+        private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY.replace(new RegExp('\\\\n', '\g'), '\n'),
         client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
         client_id: process.env.GOOGLE_SHEETS_CLIENT_ID,
         client_x509_cert_url: process.env.GOOGLE_SHEETS_CLIENT_CERT_URL,
