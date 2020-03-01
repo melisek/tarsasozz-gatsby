@@ -55,6 +55,15 @@ exports.createPages = async ({ graphql, actions }) => {
                     }
                 }
             }
+            allGoogleSheetGamesRow {
+                edges {
+                  node {
+                    bggId
+                    slug
+                    title
+                  }
+                }
+            }
         }
     `)
 
@@ -68,6 +77,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const authors = result.data.allGhostAuthor.edges
     const pages = result.data.allGhostPage.edges
     const posts = result.data.allGhostPost.edges
+    const games = result.data.allGoogleSheetGamesRow.edges
 
     // Load templates
     const indexTemplate = path.resolve(`./src/templates/index.js`)
@@ -169,10 +179,13 @@ exports.createPages = async ({ graphql, actions }) => {
         node.url = `/${node.slug}/`
 
         let pageTagSlugs = new Array();
+        let gameId
+
         if (node.featured)
         {
             const internalPageTags = node.tags.filter(tag => tag.visibility === "internal");
             pageTagSlugs = Array.from(internalPageTags, tag => tag.slug);
+            //gameId = games.find(g => g.node.slug === node.slug).bggId;
         }
 
         createPage({
@@ -182,7 +195,8 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
-                tags: pageTagSlugs
+                tags: pageTagSlugs,
+                //gameId: gameId
             },
         })
     })

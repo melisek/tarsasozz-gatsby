@@ -35,7 +35,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 
                 <div className="viewport-top">
                     {/* The main header section on top of the screen  ${site.cover_image} */}
-                    <header className="site-head" style={isHome? { ...site.cover_image && { height: `450px` } } : {} }>
+                    <header className="site-head" style={isHome? { ...site.cover_image && { height: `505px` } } : {} }>
                         <div className="container">
                             <div className="site-mast">
                                 <div className="site-mast-left">
@@ -67,13 +67,18 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             </div>
                             { isHome ?
                                 <div className="site-banner">
-                                    <h1 className="site-banner-title">{site.title}</h1>
-                                    <p className="site-banner-desc">{site.description}</p>
-                                    <div className="site-banner-categories">
-                                        <div className="site-banner-category" id="csaladi"></div>
-                                        <div className="site-banner-category" id="strategiai"></div>
-                                        <div className="site-banner-category" id="party"></div>
-                                        
+                                    <div className="site-banner-left">
+                                        <h1 className="site-banner-title">{site.title}</h1>
+                                        <p className="site-banner-desc">{site.description}</p>
+                                    </div>
+                                    <div className="site-banner-right">
+                                        <div className="site-banner-categories">
+                                            <a className="site-banner-category site-banner-green" id="csaladi" href="/tag/csaladi-tarsasjatekok/"><div><span className="site-banner-category-title">#családi</span></div></a>
+                                            <a className="site-banner-category site-banner-purple" href="/tag/kooperativ-tarsasjatekok/"><div ><span className="site-banner-category-title">#kooperatív</span></div></a>
+
+                                            <a className="site-banner-category site-banner-purple" id="strategiai" href="/tag/strategiai-tarsasjatekok/"><div><span className="site-banner-category-title">#stratégiai</span></div></a>
+                                            <a className="site-banner-category site-banner-green" id="party" href="/tag/party-tarsasjatekok/"><div ><span className="site-banner-category-title">#party</span></div></a>
+                                        </div>
                                     </div>
                                 </div> :
                                 null

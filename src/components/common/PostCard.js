@@ -18,7 +18,18 @@ const PostCard = ({ post, featured }) => {
                     <div className="post-card-image"><Img fluid={featuredImage} alt={post.title} /></div>
                 }
                 <div className="post-card-head">
-                    {post.tags && <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div>}
+                    
+                    <div className="post-card-tags">
+                        { post.tags && <Tags post={post} visibility="public" autolink={false} /> }
+                        <span className="post-card-date">
+                            {new Intl.DateTimeFormat("hu-HU", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                            }).format(new Date(post.published_at))}
+                        </span>
+                    </div>
+                    
                     <h2 className="post-card-title">{post.title}</h2>
                 </div>
             </header>

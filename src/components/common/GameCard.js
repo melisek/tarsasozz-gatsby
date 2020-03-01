@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
 import Img from 'gatsby-image'
 
-const PlayCard = ({ play, page, title }) => {
+const GameCard = ({ play, page, title }) => {
 
     let gameTitle = play.name
     let gameHasPage = false
@@ -35,40 +35,17 @@ const PlayCard = ({ play, page, title }) => {
 
             <section className="play-card-content">
                 <div className="play-card-date">
-                    { new Intl.DateTimeFormat("hu-HU", {
-                                        year: "numeric",
-                                        month: "2-digit",
-                                        day: "2-digit"
-                                    }).format(new Date(play.playDate))
-                    }
+                    {play.numPlays} alkalommal
                 </div>
-
-                {/* <div className="play-card-players">
-                    {play.players.map((player, i) => 
-                        <span key={i}>
-                        {
-                            player.username !== null && player.username !== "" ?
-                            <a href={`https://boardgamegeek.com/user/${player.username}`}>
-                                <span title={player.win ? "Nyertes" : null} style={player.win ? {fontWeight: "bold"} : null }>
-                                    {player.name}
-                                </span>
-                            </a>
-                            : <span style={player.win ? {fontWeight: "bold"} : null }>{player.name}</span>
-                        }
-                        
-                        <span>{i !== play.players.length - 1 ? `, ` : null}</span>
-                        </span>
-                    )}
-                </div> */}
             </section>
         </a>
     )
 }
 
-PlayCard.propTypes = {
+GameCard.propTypes = {
     play: PropTypes.object.isRequired,
     page: PropTypes.object,
     title: PropTypes.string
 }
 
-export default PlayCard
+export default GameCard

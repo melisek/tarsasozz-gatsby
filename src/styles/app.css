@@ -670,15 +670,23 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 }
 
 .content-header {
-    text-align: center;
     font-size: 0.8em;
     color: var(--color-secondary);
     padding-bottom: 1vw;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 40px;
+}
+
+.content-header a {
+    color: var(--color-secondary);
+    text-decoration: none;
 }
 
 .content-published-date {
     display: inline-block;
-    padding-left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .content-tags {
@@ -797,18 +805,25 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding-top: 2em;
     padding-bottom: 2em;
     color: #fff;
-    background: var(--color-bg);
+    background: #281a6a;
     background-position: center;
     background-size: cover;
-    background-image: url("/images/bg1.svg");
+    /*background-image: url("/images/bg1.svg");*/
 }
 
-.site-nav-item {
+.a-nav-item {
     display: inline-block;
     padding: 5px 10px;
     color: var(--color-base);
     font-weight: 700;
     opacity: 0.7;
+}
+
+.site-nav-item {
+    display: inline-block;
+    padding: 5px 10px;
+    color: var(--color-border);
+    font-weight: 700;
 }
 
 .site-nav-item:hover {
@@ -844,8 +859,19 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     max-width: 100%;
     margin: 0 auto;
     padding: 0;
-    text-align: center;
 
+}
+
+.site-banner-left, .site-banner-right {
+    display: inline-block;
+}
+
+.site-banner-left {
+    width: 50%;
+}
+
+.site-banner-right {
+    width: 50%;
 }
 
 .site-banner-categories {
@@ -853,25 +879,56 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     justify-content: space-between;
     grid-gap: 30px;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "wide1 wide1 ."
+    ". wide2 wide2";
 }
 
+
+
 .site-banner-category {
-    background-size: 300px;
+    background-size: 250px;
     background-repeat: no-repeat;
     background-position: top;
-    height: 250px;
+    height: 175px;
+
+    border-radius: 15px;
+    position: relative;
 }
 
 .site-banner-category#csaladi {
     background-image: url("/images/csaladi.svg");
+    grid-area: wide1;
 }
 
 .site-banner-category#party {
     background-image: url("/images/party.svg");
+    grid-area: wide2;
 }
 
 .site-banner-category#strategiai {
     background-image: url("/images/strategiai.svg");
+    background-color: #83bdce;
+
+}
+
+.site-banner-purple {
+    background-color:#c733f8;
+}
+
+.site-banner-green {
+    background-color: #90e859;
+}
+
+.site-banner-category-title {
+    color: #406a43;
+    position: absolute;
+    bottom: 0;
+    /* align-content: center; */
+    /* text-align: center; */
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 1.5em;
+    padding: 10px;
 }
 
 .site-banner-title {
@@ -887,7 +944,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding: 0;
     font-size: 2.4rem;
     line-height: 1.3em;
-    opacity: 0.7;
+    color: #82cecd;
 }
 
 .site-nav {
@@ -964,13 +1021,19 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     text-align: center;
     width: 500px;
 }
-.author-card .content-author-image {
-    width: 70px;
-    height: 70px;
+.content-author-image {
+    width: 40px;
+    height: 40px;
     background-position: top center;
     background-size: cover;
     border-radius: 50%;
+    float:left;
+}
+.author-card .content-author-image {
     margin: -35px auto 30px;
+    width: 70px;
+    height: 70px;
+    float: none;
 }
 .author-card a:hover {
     text-decoration:none
@@ -1029,6 +1092,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .post-card-featured {
     grid-area: last_post;
+    margin-top: -30px;
 }
 
 .post-card-featured .post-card-head {
@@ -1070,6 +1134,14 @@ section.play-card-content {
         ". ."
         ". .";
     }
+
+    .play-feed {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        ". ."
+        ". ."
+        ". .";
+    }
 }
 @media (max-width: 680px) {
     .post-feed {
@@ -1085,6 +1157,7 @@ section.play-card-content {
     .post-card-featured .post-card-excerpt {
         padding-bottom:5vw;
     }
+
 }
 
 .post-card, .author-card, .featured-page-card, .play-card {
@@ -1140,10 +1213,15 @@ section.play-card-content {
     padding: 40px;
 }
 
+.post-card-date {
+    float:right;
+}
+
 .post-card-image, .page-card-image, .play-card-image {
     margin: 0;
     width: auto;
     height: 200px;
+    height: 100%;
     background: #fff no-repeat center center;
     background-size: cover;
     border-top-left-radius: 8px;
@@ -1246,6 +1324,12 @@ section.play-card-content {
 
 .featured-page-grid .content {
     margin: 0;
+}
+
+.home-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 40px;
 }
 
 /* Tag Archives

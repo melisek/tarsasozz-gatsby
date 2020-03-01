@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 
 import { Layout } from '../components/common'
 import PostCard from '../components/common/PostCard'
+import PlayCard from '../components/common/PlayCard'
 import { MetaData } from '../components/common/meta'
 import Img from 'gatsby-image'
 
@@ -18,6 +19,9 @@ const Page = ({ data, location }) => {
     const page = data.ghostPage;
     const relatedPosts = data.allGhostPost.edges;
     const featuredImage = data.ghostPage.localFeatureImage ? data.ghostPage.localFeatureImage.childImageSharp.fluid : null;
+
+    // const plays = data.allInternalPlays.edges
+    // const games = data.allGoogleSheetGamesRow.edges
 
     return (
         <>
@@ -58,7 +62,16 @@ const Page = ({ data, location }) => {
                                     </article>
 
                                 : null
-                            } 
+                            }
+
+                            {/* <section className="play-feed">
+                                {plays.map(({ node, i }) => {
+                                        let playGameId = node.gameId;
+                                        let game = games.find(({ node }) => node.bggId === playGameId);
+                                        
+                                        return <PlayCard play={node} key={i} title={game.node.title} />
+                                })}
+                            </section> */}
                         </section>
 
                     : <article className="content">
@@ -93,11 +106,30 @@ Page.propTypes = {
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,
         }).isRequired,
-        allGhostPost: PropTypes.object.isRequired
+        allGhostPost: PropTypes.object.isRequired,
+        //allInternalPlays: PropTypes.object.isRequired,
+        allGoogleSheetGamesRow: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
 
+// allInternalPlays(filter: {gameId: {ne: null}}, sort: {fields: playDate, order: DESC}) {
+//     edges {
+//       node {
+//         name
+//         gameId
+//         image
+//         thumbnail
+//         playDate
+//         comments
+//         players {
+//           name
+//           username
+//           win
+//         }
+//       }
+//     }
+// }
 export default Page
 
 export const postQuery = graphql`
@@ -117,6 +149,16 @@ export const postQuery = graphql`
                 ...GatsbyImageSharpPostCard
             }
           }
+        }
+        
+        allGoogleSheetGamesRow {
+            edges {
+              node {
+                bggId
+                slug
+                title
+              }
+            }
         }
     }
 `

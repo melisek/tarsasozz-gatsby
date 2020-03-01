@@ -25,7 +25,7 @@ const Post = ({ data, location }) => {
     });
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
-
+    const author = post.primary_author;
     return (
         <>
             <MetaData
@@ -49,6 +49,22 @@ const Post = ({ data, location }) => {
                             <h1 className="content-title">{post.title}</h1>
 
                             <div class="content-header">
+                                {author.profile_image ?
+                                    <a href={`/author/${author.slug}`} title={author.name}>
+                                        <div className="content-author-image" style={{backgroundImage: `url(${author.profile_image})`}}></div>
+                                    </a>
+                                    : null
+                                }
+                                <a href={`/author/${author.slug}`} title={author.name} style={{paddingLeft:"15px"}}>{author.name}</a>
+
+                                <div class="content-published-date">
+                                    {new Intl.DateTimeFormat("hu-HU", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                                    }).format(new Date(post.published_at))}
+                                </div>
+
                                 <div class="content-tags">
                                     {public_tags.map((tag, i) => {     
                                         return (
@@ -59,15 +75,6 @@ const Post = ({ data, location }) => {
                                     })}
                                 </div>
 
-                                &bull;
-
-                                <div class="content-published-date">
-                                    {new Intl.DateTimeFormat("hu-HU", {
-                                        year: "numeric",
-                                        month: "2-digit",
-                                        day: "2-digit"
-                                    }).format(new Date(post.published_at))}
-                                </div>
                             </div>   
 
                             {/* The main post content */ }

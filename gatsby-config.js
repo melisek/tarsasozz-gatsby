@@ -95,21 +95,37 @@ module.exports = {
         {
             resolve: "gatsby-source-apiserver",
             options: {
-              // Type prefix of entities from server
-              typePrefix: "internal__",
-        
-              // The url, this should be the endpoint you are attempting to pull data from
-              url: `${bggEnv.apiUrl}plays/${bggEnv.username}/`,
-        
-              method: "get",
-        
-              headers: {
-                "Content-Type": "application/json"
-              },
+                    typePrefix: "internal__",
+                    // The url, this should be the endpoint you are attempting to pull data from
+                    url: `${bggEnv.apiUrl}mostplayed/${bggEnv.username}/`,
+                
+                    method: "get",
+                
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-              name: `plays`,
+                    name: `mostPlayedGames`,
             }
         },
+        // {
+        //     resolve: "gatsby-source-apiserver",
+        //     options: {
+        //       // Type prefix of entities from server
+        //       typePrefix: "internal__",
+        
+        //       // The url, this should be the endpoint you are attempting to pull data from
+        //       url: `${bggEnv.apiUrl}mostplayed/${bggEnv.username}/`,
+        
+        //       method: "get",
+        
+        //       headers: {
+        //         "Content-Type": "application/json"
+        //       },
+
+        //       name: `mostPlayedGames`,
+        //     }
+        // },
         `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-source-ghost`,
