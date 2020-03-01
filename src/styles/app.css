@@ -898,16 +898,18 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 .site-banner-category#csaladi {
     background-image: url("/images/csaladi.svg");
     grid-area: wide1;
+    background-color: #edbf2e;
 }
 
 .site-banner-category#party {
     background-image: url("/images/party.svg");
     grid-area: wide2;
+    background-color: #dd708c;
 }
 
 .site-banner-category#strategiai {
     background-image: url("/images/strategiai.svg");
-    background-color: #83bdce;
+    background-color: #82cecd;
 
 }
 
@@ -916,11 +918,11 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 }
 
 .site-banner-green {
-    background-color: #90e859;
+    background-color: #42799b;
 }
 
 .site-banner-category-title {
-    color: #406a43;
+    color: var(--color-bg);
     position: absolute;
     bottom: 0;
     /* align-content: center; */
