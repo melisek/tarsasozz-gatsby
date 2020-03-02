@@ -805,7 +805,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding-top: 2em;
     padding-bottom: 2em;
     color: #fff;
-    background: #281a6a;
+    background: #444471;
     background-position: center;
     background-size: cover;
     /*background-image: url("/images/bg1.svg");*/
@@ -899,6 +899,8 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     background-image: url("/images/csaladi.svg");
     grid-area: wide1;
     background-color: #edbf2e;
+    background-size: 210px;
+    right:0
 }
 
 .site-banner-category#party {
@@ -909,8 +911,15 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-banner-category#strategiai {
     background-image: url("/images/strategiai.svg");
-    background-color: #82cecd;
+    background-color: #42799b;
+    background-size: 120px;
+}
 
+.site-banner-category#kooperativ {
+    background-image: url("/images/kooperativ.svg");
+    background-color: #82cecd;
+    background-size: 100px;
+    background-position: center;
 }
 
 .site-banner-purple {
@@ -921,8 +930,13 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     background-color: #42799b;
 }
 
+.site-banner-category#strategiai .site-banner-category-title { 
+    color: #d9e6ed;
+    top: 0;
+}
+
 .site-banner-category-title {
-    color: var(--color-bg);
+    color: #4e4e7d;
     position: absolute;
     bottom: 0;
     /* align-content: center; */

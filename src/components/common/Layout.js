@@ -74,7 +74,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                     <div className="site-banner-right">
                                         <div className="site-banner-categories">
                                             <a className="site-banner-category" id="csaladi" href="/tag/csaladi-tarsasjatekok/"><div><span className="site-banner-category-title">#családi</span></div></a>
-                                            <a className="site-banner-category site-banner-green" href="/tag/kooperativ-tarsasjatekok/"><div ><span className="site-banner-category-title">#kooperatív</span></div></a>
+                                            <a className="site-banner-category site-banner-green" id="kooperativ" href="/tag/kooperativ-tarsasjatekok/"><div ><span className="site-banner-category-title">#kooperatív</span></div></a>
 
                                             <a className="site-banner-category" id="strategiai" href="/tag/strategiai-tarsasjatekok/"><div><span className="site-banner-category-title">#stratégiai</span></div></a>
                                             <a className="site-banner-category" id="party" href="/tag/party-tarsasjatekok/"><div ><span className="site-banner-category-title">#party</span></div></a>
