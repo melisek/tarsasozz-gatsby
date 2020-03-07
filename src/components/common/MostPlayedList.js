@@ -14,7 +14,7 @@ const MostPlayedList = ({ data }) => {
 
     return (
         <>
-            <div className="container">
+            <div className="container mostplayed-list">
                 <h2 className="home-title">Legutóbb ezekkel játszottunk</h2>
                 <section className="play-feed">
                     {plays.map(({ node, i }) => {

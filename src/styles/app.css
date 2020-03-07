@@ -857,7 +857,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-banner {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 20px auto 0;
     padding: 0;
 
 }
@@ -984,7 +984,6 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
         font-size: 2em;
     }
     .site-banner-title, .site-banner-desc {
-
         width: 70%;
         display:inline-block;
     }
@@ -1009,9 +1008,6 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
         font-size: 1.5em;
     }
 }
-
-
-
 
 .site-nav {
     display: flex;
@@ -1398,6 +1394,10 @@ section.play-card-content {
     margin-bottom: 40px;
 }
 
+.mostplayed-list {
+    padding-bottom: 60px;
+}
+
 /* Tag Archives
 /* ---------------------------------------------------------- */
 
@@ -1532,7 +1532,7 @@ section.play-card-content {
     padding: 20px 0 40px 0;
     color: rgba(255,255,255,0.7);
     font-size: 1.3rem;
-    background: var(--color-base);
+    background: #444471;
 }
 
 .site-foot-nav {

@@ -35,7 +35,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 
                 <div className="viewport-top">
                     {/* The main header section on top of the screen  ${site.cover_image} */}
-                    <header className="site-head" style={isHome? { ...site.cover_image && { height: `505px` } } : {} }>
+                    <header className="site-head" style={isHome? { ...site.cover_image && { height: `530px` } } : {} }>
                         <div className="container">
                             <div className="site-mast">
                                 <div className="site-mast-left">
@@ -60,9 +60,8 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                         </div>
                                     </nav>
 
-                                    {/* { site.twitter && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
                                     { site.facebook && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
-                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a> */}
+                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
                                 </div>
                             </div>
                             { isHome ?
