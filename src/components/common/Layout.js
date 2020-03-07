@@ -70,6 +70,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                     <div className="site-banner-left">
                                         <h1 className="site-banner-title">{site.title}</h1>
                                         <p className="site-banner-desc">{site.description}</p>
+                                        <div className="site-banner-castle"></div>
                                     </div>
                                     <div className="site-banner-right">
                                         <div className="site-banner-categories">

@@ -808,7 +808,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     background: #444471;
     background-position: center;
     background-size: cover;
-    /*background-image: url("/images/bg1.svg");*/
+    /* background-image: url("/images/bg-light.svg"); */
 }
 
 .a-nav-item {
@@ -872,6 +872,14 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-banner-right {
     width: 50%;
+}
+
+.site-banner-castle {
+    width: 300px;
+    height: 300px;
+    background-image: url("/images/castle.svg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .site-banner-categories {
@@ -995,7 +1003,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 .site-main {
     background-color: var(--color-bg);
     background-size: 300px;
-    background-image: url(/images/geo7.jpg);
+    background-image: url(/images/bg.svg);
 }
 
 .kg-gallery-row {
