@@ -874,6 +874,8 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     width: 50%;
 }
 
+
+
 .site-banner-castle {
     width: 300px;
     height: 300px;
@@ -970,6 +972,46 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     line-height: 1.3em;
     color: #82cecd;
 }
+
+@media (max-width: 1080px) {
+    .site-banner-category-title {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 800px) {
+    .site-banner-title{
+        font-size: 2em;
+    }
+    .site-banner-title, .site-banner-desc {
+
+        width: 70%;
+        display:inline-block;
+    }
+    .site-banner-desc{
+        font-size: 1em;
+    }
+    .site-banner-left {
+        padding-left: 15px;
+    }
+    .site-banner-left, .site-banner-right {
+        width: 100%;
+    }
+    .site-banner-castle {
+        height: 100px;
+        width:20%;
+        float:right;
+    }
+    .site-head {
+        min-height:650px
+    }
+    .site-banner-category-title {
+        font-size: 1.5em;
+    }
+}
+
+
+
 
 .site-nav {
     display: flex;
