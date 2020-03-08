@@ -20,7 +20,6 @@ import '../../styles/app.css'
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const site = data.allGhostSettings.edges[0].node
-    const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null
     const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
 
     return (
@@ -39,13 +38,12 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         <div className="container">
                             <div className="site-mast">
                                 <div className="site-mast-left">
-                                <Link to="/">
-                                                {site.logo ?
-                                                    <img className="site-logo" src={site.logo} alt={site.title} />
-                                                    : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
-                                                }
-                                            </Link>
-                                            {site.title}
+                                    <Link to="/">
+                                        {site.logo ?
+                                            <img className="site-logo" src={site.logo} alt={site.title} />
+                                            : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
+                                        }
+                                    </Link>
                                 </div>
                                 <div className="site-mast-right">
 
