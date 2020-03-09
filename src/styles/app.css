@@ -1001,11 +1001,17 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
         width:20%;
         float:right;
     }
-    .site-head {
-        min-height:650px
+    .site-head-home {
+        min-height:705px
     }
     .site-banner-category-title {
         font-size: 1.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    .site-nav-item:first-child {
+        display:none
     }
 }
 
@@ -1227,7 +1233,7 @@ section.play-card-content {
     text-decoration: none;
 
     display: inline-block;
-    background-color: #fff;
+    background-color: #fdfeff;
     border-radius: 8px;
     box-shadow: 0 1px 1px #e6e6e6, 0 2px 4px #e6e6e6;
     
