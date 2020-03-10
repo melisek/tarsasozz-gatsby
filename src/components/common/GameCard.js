@@ -35,7 +35,11 @@ const GameCard = ({ play, page, title }) => {
 
             <section className="play-card-content">
                 <div className="play-card-date">
-                    {play.numPlays} alkalommal
+                    {new Intl.DateTimeFormat("hu-HU", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                            }).format(new Date(play.playDate))}
                 </div>
             </section>
         </a>

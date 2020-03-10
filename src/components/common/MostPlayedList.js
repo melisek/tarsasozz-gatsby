@@ -17,14 +17,14 @@ const MostPlayedList = ({ data }) => {
             <div className="container mostplayed-list">
                 <h2 className="home-title">Legutóbb ezekkel játszottunk</h2>
                 <section className="play-feed">
-                    {plays.map(({ node, i }) => {
+                    {plays.map(({ node }) => {
                             let playGameId = node.gameId;
                             let game = games.find(({ node }) => node.bggId === playGameId);
                             let page = game !== undefined && game !== null 
                                 ? pages.find(p => p.node.slug === game.node.slug)
                                 : null;
                             
-                            return <GameCard play={node} page={page} key={i} title={game?.node?.title} />
+                            return <GameCard play={node} page={page} key={playGameId} title={game?.node?.title} />
                     })}
                 </section>
             </div>
