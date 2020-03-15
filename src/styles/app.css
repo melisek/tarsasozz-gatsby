@@ -556,6 +556,11 @@ h6 {
     margin: 0 auto;
 }
 
+.featured-page-full-content p {
+    line-height: 60px;
+    font-weight: 500;
+}
+
 @media (max-width: 800px) {
     .post-full-content {
         max-width: 92%;
@@ -798,6 +803,26 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     border-radius: 12px;
 }
 
+.game-icon {
+    width: 60px;
+    height: 60px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    float:left;
+    margin-right: 20px;
+}
+.icon-players {
+    background-image: url(/images/jatekosok.svg);
+}
+.icon-time {
+    background-image: url(/images/ido.svg);
+}
+
+.icon-age {
+    background-image: url(/images/korosztaly.svg);
+}
+
+
 /* Header
 /* ---------------------------------------------------------- */
 
@@ -806,9 +831,13 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding-bottom: 2em;
     color: #fff;
     background: #444471;
-    background-position: center;
-    background-size: cover;
-    /* background-image: url("/images/bg-light.svg"); */
+}
+
+.site-head-home {
+    background-position: left;
+    background-size: 50%;
+    background-image: url(/images/ferde-bg.png);
+    background-repeat: no-repeat;
 }
 
 .a-nav-item {
@@ -868,21 +897,22 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-banner-left {
     width: 50%;
+
+
 }
 
 .site-banner-right {
     width: 50%;
 }
 
-
-
-.site-banner-castle {
-    width: 300px;
-    height: 300px;
-    background-image: url("/images/castle.svg");
-    background-repeat: no-repeat;
-    background-position: center;
+.site-banner-container {
+    background: #444371d1;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 3px 3px #6c6cb7, 0 3px 2px #9593e0;
+    width:85%
 }
+
 
 .site-banner-categories {
     display: grid;
@@ -963,6 +993,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     color: #fff;
     font-size: 4rem;
     line-height: 1.3em;
+    display: inline;
 }
 
 .site-banner-desc {
@@ -1002,7 +1033,8 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
         float:right;
     }
     .site-head-home {
-        min-height:705px
+        min-height:705px;
+        background-image: none;
     }
     .site-banner-category-title {
         font-size: 1.5em;
@@ -1010,8 +1042,11 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 }
 
 @media (max-width: 600px) {
-    .site-nav-item:first-child {
-        display:none
+    .site-nav {
+        display:none!important;
+    }
+    .site-banner-category-title {
+        font-size: 1em;
     }
 }
 
@@ -1422,8 +1457,17 @@ section.play-card-content {
 /* ---------------------------------------------------------- */
 
 .tag-header {
-    max-width: 690px;
-    margin: 0 0 4vw;
+    padding: 30px 0;
+    display: grid;
+    justify-content: space-between;
+    grid-gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+        "tag_header tag_header .";
+}
+
+.tag-header-left {
+    grid-area: tag_header;
 }
 
 .tag-header h1 {
@@ -1435,6 +1479,10 @@ section.play-card-content {
     color: var(--color-secondary);
     font-size: 2.2rem;
     line-height: 1.3em;
+}
+
+.tag-feature-image {
+    border-radius: 8px;
 }
 
 @media (max-width: 500px) {

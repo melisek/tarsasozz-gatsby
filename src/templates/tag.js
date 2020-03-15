@@ -25,8 +25,18 @@ const Tag = ({ data, location, pageContext }) => {
             <Layout>
                 <div className="container">
                     <header className="tag-header">
-                        <h1>{tag.name}</h1>
-                        {tag.description ? <p>{tag.description}</p> : null }
+                        <div className="tag-header-left">
+                            <h1>{tag.name}</h1>
+                            {tag.description ? <p>{tag.description}</p> : null }
+                        </div>
+                        {
+                            tag.feature_image 
+                            ?   <div className="tag-header-right">
+                                    <img className="tag-feature-image" src={tag.feature_image} alt={tag.name} />
+                                </div>
+                            : null
+                        }
+                        
                     </header>
                     <section className="post-feed">
                         {posts.map(({ node }) => (

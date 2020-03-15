@@ -21,7 +21,7 @@ const Page = ({ data, location }) => {
     const featuredImage = data.ghostPage.localFeatureImage ? data.ghostPage.localFeatureImage.childImageSharp.fluid : null;
 
     // const plays = data.allInternalPlays.edges
-    // const games = data.allGoogleSheetGamesRow.edges
+    const games = data.allGoogleSheetGamesRow.edges
 
     return (
         <>
@@ -36,16 +36,26 @@ const Page = ({ data, location }) => {
             <Layout>
                 <div className="container">
                     { page.featured ? 
-                        <section class="featured-page-grid">
+                        <section className="featured-page-grid">
                             <figure className="post-feature-image">
                                 <Img fluid={featuredImage} alt={page.title} />
                             </figure> 
 
                             <article className="content col-2">
-                                <div class="featured-page-full-content">
+                                <div className="featured-page-full-content">
                                     <h1 className="content-title">{page.title}</h1>
-                                    <div className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: page.html }}></div>
+
+                                    {games.map(({ node }) => (
+                                        <div key={node.id}>
+                                            <div className="game-icon icon-players" aria-hidden="true"></div>
+                                            <p>{node.minPlayers} - {node.maxPlayers} játékos</p>
+                                            <div className="game-icon icon-time" aria-hidden="true"></div>
+                                            <p> {node.minTime} - {node.maxTime} perc játékidő</p>
+                                            <div className="game-icon icon-age" aria-hidden="true"></div>
+                                            <p> {node.age}+ éves kortól</p>
+                                        </div>
+                                    ))}
+
                                 </div> 
                             </article>
                             {
@@ -151,12 +161,18 @@ export const postQuery = graphql`
           }
         }
         
-        allGoogleSheetGamesRow {
+        allGoogleSheetGamesRow(filter: {slug: {eq: $slug }}) {
             edges {
               node {
                 bggId
                 slug
                 title
+                minPlayers
+                maxPlayers
+                minTime
+                maxTime
+                age
+                bggRating
               }
             }
         }
