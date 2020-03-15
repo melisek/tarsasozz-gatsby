@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
-import { readingTime as readingTimeHelper } from '@tryghost/helpers'
+import Img from 'gatsby-image'
 
 const PostCard = ({ post, featured }) => {
     const url = `/${post.slug}/`
-    const readingTime = readingTimeHelper(post)
+
+    const featuredImage = post.localFeatureImage.childImageSharp.fluid;
 
     return (
         <Link to={url} className="post-card">
@@ -14,12 +15,21 @@ const PostCard = ({ post, featured }) => {
 
                 {
                     post.feature_image &&
-                    <div className="post-card-image" style={{
-                        backgroundImage: `url(${post.feature_image})` ,
-                    }}></div>
+                    <div className="post-card-image"><Img fluid={featuredImage} alt={post.title} /></div>
                 }
                 <div className="post-card-head">
-                    {post.tags && <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div>}
+                    
+                    <div className="post-card-tags">
+                        { post.tags && <Tags post={post} visibility="public" autolink={false} /> }
+                        <span className="post-card-date">
+                            {new Intl.DateTimeFormat("hu-HU", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                            }).format(new Date(post.published_at))}
+                        </span>
+                    </div>
+                    
                     <h2 className="post-card-title">{post.title}</h2>
                 </div>
             </header>
@@ -50,6 +60,7 @@ PostCard.propTypes = {
         slug: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         feature_image: PropTypes.string,
+        localFeatureImage: PropTypes.object,
         featured: PropTypes.bool,
         tags: PropTypes.arrayOf(
             PropTypes.shape({

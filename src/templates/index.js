@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, Pagination, PageList } from '../components/common'
+import { Layout, PostCard, Pagination, PageList, MostPlayedList } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -40,7 +40,7 @@ const Index = ({ data, location, pageContext }) => {
                     </section>
                     <Pagination pageContext={pageContext} />
                 </div>
-                <PageList />
+                <MostPlayedList />
             </Layout>
         </>
     )
@@ -70,6 +70,7 @@ export const pageQuery = graphql`
       edges {
         node {
           ...GhostPostFields
+          ...GatsbyImageSharpPostCard
         }
       }
     }

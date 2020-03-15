@@ -1,6 +1,7 @@
 const path = require(`path`)
 const { postsPerPage } = require(`./src/utils/siteConfig`)
 const { paginate } = require(`gatsby-awesome-pagination`)
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
 /**
  * Here is the place where Gatsby creates the URLs for all the
@@ -22,7 +23,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     }
                 }
             }
-            allGhostTag(sort: { order: ASC, fields: name }, filter: { visibility: {eq: "public"} }) {
+            allGhostTag(sort: { order: ASC, fields: name } ) {
                 edges {
                     node {
                         slug
@@ -54,6 +55,15 @@ exports.createPages = async ({ graphql, actions }) => {
                     }
                 }
             }
+            allGoogleSheetGamesRow {
+                edges {
+                  node {
+                    bggId
+                    slug
+                    title
+                  }
+                }
+            }
         }
     `)
 
@@ -67,6 +77,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const authors = result.data.allGhostAuthor.edges
     const pages = result.data.allGhostPage.edges
     const posts = result.data.allGhostPost.edges
+    const games = result.data.allGoogleSheetGamesRow.edges
 
     // Load templates
     const indexTemplate = path.resolve(`./src/templates/index.js`)
@@ -168,10 +179,13 @@ exports.createPages = async ({ graphql, actions }) => {
         node.url = `/${node.slug}/`
 
         let pageTagSlugs = new Array();
+        let gameId
+
         if (node.featured)
         {
             const internalPageTags = node.tags.filter(tag => tag.visibility === "internal");
             pageTagSlugs = Array.from(internalPageTags, tag => tag.slug);
+            //gameId = games.find(g => g.node.slug === node.slug).bggId;
         }
 
         createPage({
@@ -181,7 +195,8 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
-                tags: pageTagSlugs
+                tags: pageTagSlugs,
+                //gameId: gameId
             },
         })
     })
@@ -222,3 +237,37 @@ exports.createPages = async ({ graphql, actions }) => {
         },
     })
 }
+
+exports.onCreateNode = async ({
+    node,
+    actions,
+    store,
+    createNodeId,
+    cache
+}) => {
+    // Check that we are modifying right node types.
+    const nodeTypes = [`GhostPost`, `GhostPage`];
+    if (!nodeTypes.includes(node.internal.type)) {
+        return;
+    }
+
+    const { createNode } = actions;
+
+    if (node.feature_image) 
+    {
+        // Download image and create a File node with gatsby-transformer-sharp.
+        const fileNode = await createRemoteFileNode({
+            url: node.feature_image,
+            store,
+            cache,
+            createNode,
+            parentNodeId: node.id,
+            createNodeId
+        });
+
+        if (fileNode) {
+            // Link File node to GhostPost node at field image.
+            node.localFeatureImage___NODE = fileNode.id;
+        }
+    }
+};

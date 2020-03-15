@@ -8,6 +8,7 @@ import { MetaData } from '../components/common/meta'
 import AuthorCard from '../components/common/AuthorCard'
 import PostCard from '../components/common/PostCard'
 import { Tags } from '@tryghost/helpers-gatsby'
+import Img from 'gatsby-image'
 
 /**
 * Single post view (/:slug)
@@ -23,6 +24,8 @@ const Post = ({ data, location }) => {
         return t.visibility === "public"
     });
 
+    const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
+    const author = post.primary_author;
     return (
         <>
             <MetaData
@@ -38,7 +41,7 @@ const Post = ({ data, location }) => {
                     <article className="content">
                         { post.feature_image ?
                             <figure className="post-feature-image">
-                                <img src={ post.feature_image } alt={ post.title } />
+                                <Img fluid={featuredImage} alt={post.title} />
                             </figure> 
                             : null 
                         }
@@ -46,6 +49,22 @@ const Post = ({ data, location }) => {
                             <h1 className="content-title">{post.title}</h1>
 
                             <div class="content-header">
+                                {author.profile_image ?
+                                    <a href={`/author/${author.slug}`} title={author.name}>
+                                        <div className="content-author-image" style={{backgroundImage: `url(${author.profile_image})`}}></div>
+                                    </a>
+                                    : null
+                                }
+                                <a href={`/author/${author.slug}`} title={author.name} style={{paddingLeft:"15px"}}>{author.name}</a>
+
+                                <div class="content-published-date">
+                                    {new Intl.DateTimeFormat("hu-HU", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                                    }).format(new Date(post.published_at))}
+                                </div>
+
                                 <div class="content-tags">
                                     {public_tags.map((tag, i) => {     
                                         return (
@@ -56,15 +75,6 @@ const Post = ({ data, location }) => {
                                     })}
                                 </div>
 
-                                &bull;
-
-                                <div class="content-published-date">
-                                    {new Intl.DateTimeFormat("hu-HU", {
-                                        year: "numeric",
-                                        month: "2-digit",
-                                        day: "2-digit"
-                                    }).format(new Date(post.published_at))}
-                                </div>
                             </div>   
 
                             {/* The main post content */ }
@@ -138,6 +148,21 @@ export const postQuery = graphql`
     query($slug: String!, $tags: [String!]) {
         ghostPost(slug: { eq: $slug }) {
             ...GhostPostFields
+            localFeatureImage {
+                childImageSharp {
+                    fluid(
+                        maxWidth: 1200
+                        maxHeight: 700
+                        cropFocus: CENTER
+                    ) {
+                        aspectRatio
+                        src
+                        srcSet
+                        sizes
+                        base64
+                    }
+                }
+            }
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
@@ -146,7 +171,8 @@ export const postQuery = graphql`
         ) {
           edges {
             node {
-              ...GhostPostFields
+                ...GhostPostFields
+                ...GatsbyImageSharpSinglePost
             }
           }
         }

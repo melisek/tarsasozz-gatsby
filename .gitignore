@@ -75,4 +75,8 @@ yarn-error.log
 .netlify/
 .env.development
 .ghost.json
+.bgg.json
+package-lock.json
 .google-sheets-config.json
+.env.production
+

@@ -1,32 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-
+import Img from 'gatsby-image'
 
 // Styles
 import '../../styles/app.css'
 
-/**
-* Main layout component
-*
-* The Layout component wraps around each page and template.
-* It also provides the header, footer as well as the main
-* styles, and meta data for each page.
-*
-*/
 const PageList = ({ data }) => {
     const featuredPages = data.allGhostPage.edges;
 
-    console.log(featuredPages);
     return (
         <>
             <section className="page-list">
                 <h2>Kiemelt társasjátékok</h2>
                 <div className="page-list__container">
 
-                    {featuredPages.map(({ node }) => (
-                        <a href={node.slug} title={node.title}>
-                            <img src={node.feature_image} alt={node.title} />
+                    {featuredPages.map(({ node, i }) => (
+                        <a href={node.slug} title={node.title} key={i}>
+                            <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} />
                         </a>
                     ))}
 
@@ -53,6 +44,7 @@ const PageListQuery = props => (
                     edges {
                         node {
                             ...GhostPageFields
+                            ...GatsbyImageSharpSinglePage
                         }
                     }
                 }

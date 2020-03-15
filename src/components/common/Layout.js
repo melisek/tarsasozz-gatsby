@@ -20,7 +20,6 @@ import '../../styles/app.css'
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const site = data.allGhostSettings.edges[0].node
-    const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null
     const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
 
     return (
@@ -34,18 +33,17 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
             <div className="viewport">
 
                 <div className="viewport-top">
-                    {/* The main header section on top of the screen */}
-                    <header className="site-head" style={isHome? { ...site.cover_image && { backgroundImage: `url(${site.cover_image})`, height: `300px` } } : {} }>
+                    {/* The main header section on top of the screen  ${site.cover_image} */}
+                    <header className={isHome ? `site-head site-head-home` : `site-head`} style={isHome? { ...site.cover_image && {} } : {} }>
                         <div className="container">
                             <div className="site-mast">
                                 <div className="site-mast-left">
-                                <Link to="/">
-                                                {site.logo ?
-                                                    <img className="site-logo" src={site.logo} alt={site.title} />
-                                                    : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
-                                                }
-                                            </Link>
-                                            {site.title}
+                                    <Link to="/">
+                                        {site.logo ?
+                                            <img className="site-logo" src={site.logo} alt={site.title} />
+                                            : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
+                                        }
+                                    </Link>
                                 </div>
                                 <div className="site-mast-right">
 
@@ -60,18 +58,30 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                         </div>
                                     </nav>
 
-                                    {/* { site.twitter && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
                                     { site.facebook && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
-                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a> */}
+                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
                                 </div>
                             </div>
-                            {/* { isHome ?
+                            { isHome ?
                                 <div className="site-banner">
-                                    <h1 className="site-banner-title">{site.title}</h1>
-                                    <p className="site-banner-desc">{site.description}</p>
-                                </div> :
-                                null} */}
+                                    <div className="site-banner-left">
+                                        <div className="site-banner-container">
+                                            <h1 className="site-banner-title">{site.title}</h1>
+                                            <p className="site-banner-desc">{site.description}</p>
+                                        </div>
+                                    </div>
+                                    <div className="site-banner-right">
+                                        <div className="site-banner-categories">
+                                            <a className="site-banner-category" id="csaladi" href="/tag/csaladi-tarsasjatekok/"><div><span className="site-banner-category-title">#családi</span></div></a>
+                                            <a className="site-banner-category site-banner-green" id="kooperativ" href="/tag/kooperativ-tarsasjatekok/"><div ><span className="site-banner-category-title">#kooperatív</span></div></a>
 
+                                            <a className="site-banner-category" id="strategiai" href="/tag/strategiai-tarsasjatekok/"><div><span className="site-banner-category-title">#stratégiai</span></div></a>
+                                            <a className="site-banner-category" id="party" href="/tag/party-tarsasjatekok/"><div ><span className="site-banner-category-title">#party</span></div></a>
+                                        </div>
+                                    </div>
+                                </div> :
+                                null
+                                }
                         </div>
                     </header>
 
