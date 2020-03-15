@@ -573,6 +573,9 @@ h6 {
     .container {
         padding:0
     }
+    .post-feature-image, .post-feature-image img {
+        border-radius: 0!important;
+    }
 }
 
 figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
@@ -886,7 +889,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-banner {
     max-width: 100%;
-    margin: 20px auto 0;
+    margin: 20px auto 40px 0;
     padding: 0;
 
 }
@@ -1032,18 +1035,35 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
         width:20%;
         float:right;
     }
+    .site-head {
+        padding: 1em 0;
+    }
     .site-head-home {
-        min-height:705px;
+        min-height:655px;
         background-image: none;
     }
     .site-banner-category-title {
         font-size: 1.5em;
+    }
+    .site-banner-container {
+        width: 100%;
+        box-shadow: none;
+        background: #44437166;
+    }
+    .site-banner-left {
+        background-position: right;
+        background-size: 50%;
+        background-image: url(/images/ferde-bg.png);
+        background-repeat: no-repeat;
     }
 }
 
 @media (max-width: 600px) {
     .site-nav {
         display:none!important;
+    }
+    .site-mast-left {
+        margin: 0 auto;
     }
     .site-banner-category-title {
         font-size: 1em;
@@ -1216,7 +1236,7 @@ section.play-card-content {
     .post-card-featured .post-card-image {
         float: left;
         width: 50%;
-        height: 320px;
+        height: 100%;
         margin-right: 40px;
 
         margin-bottom: 0;
@@ -1274,7 +1294,6 @@ section.play-card-content {
     .post-card-featured .post-card-excerpt {
         padding-bottom:5vw;
     }
-
 }
 
 .post-card, .author-card, .featured-page-card, .play-card {
@@ -1429,6 +1448,17 @@ section.play-card-content {
     grid-template-areas:
         ". col2 col2"
         "col3 col3 col3";
+}
+
+@media (max-width: 680px) {
+    .featured-page-grid {
+        grid-gap: 0px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "."
+            "col2"
+            "col3";
+    }
 }
 
 .featured-page-grid .col-3 {
