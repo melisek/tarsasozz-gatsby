@@ -50,7 +50,7 @@ const Page = ({ data, location }) => {
                                             <div className="game-icon icon-players" aria-hidden="true"></div>
                                             <p>{node.minPlayers} - {node.maxPlayers} játékos</p>
                                             <div className="game-icon icon-time" aria-hidden="true"></div>
-                                            <p> {node.minTime} - {node.maxTime} perc játékidő</p>
+                                            <p> {node.minTime} { node.maxTime != null ? `- ${node.maxTime}` : null } perc játékidő</p>
                                             <div className="game-icon icon-age" aria-hidden="true"></div>
                                             <p> {node.age}+ éves kortól</p>
                                         </div>
