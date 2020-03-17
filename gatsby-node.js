@@ -73,11 +73,11 @@ exports.createPages = async ({ graphql, actions }) => {
     }
 
     // Extract query results
-    const tags = result.data.allGhostTag.edges
-    const authors = result.data.allGhostAuthor.edges
-    const pages = result.data.allGhostPage.edges
-    const posts = result.data.allGhostPost.edges
-    const games = result.data.allGoogleSheetGamesRow.edges
+    const tags = null//result.data.allGhostTag.edges
+    const authors = null//result.data.allGhostAuthor.edges
+    const pages = null//result.data.allGhostPage.edges
+    const posts = null//result.data.allGhostPost.edges
+    const games = null//result.data.allGoogleSheetGamesRow.edges
 
     // Load templates
     const indexTemplate = path.resolve(`./src/templates/index.js`)
