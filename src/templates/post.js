@@ -57,7 +57,7 @@ const Post = ({ data, location }) => {
                                 }
                                 <a href={`/author/${author.slug}`} title={author.name} style={{paddingLeft:"15px"}}>{author.name}</a>
 
-                                <div class="content-published-date">
+                                <div className="content-published-date">
                                     {new Intl.DateTimeFormat("hu-HU", {
                                         year: "numeric",
                                         month: "2-digit",
@@ -65,7 +65,7 @@ const Post = ({ data, location }) => {
                                     }).format(new Date(post.published_at))}
                                 </div>
 
-                                <div class="content-tags">
+                                <div className="content-tags">
                                     {public_tags.map((tag, i) => {     
                                         return (
                                             <a href={`/tag/${tag.slug}`} title={tag.meta_title} key={i}>
