@@ -48,7 +48,7 @@ const Post = ({ data, location }) => {
                         <section className="post-full-content">
                             <h1 className="content-title">{post.title}</h1>
 
-                            <div class="content-header">
+                            <div className="content-header">
                                 {author.profile_image ?
                                     <a href={`/author/${author.slug}`} title={author.name}>
                                         <div className="content-author-image" style={{backgroundImage: `url(${author.profile_image})`}}></div>
@@ -68,7 +68,7 @@ const Post = ({ data, location }) => {
                                 <div class="content-tags">
                                     {public_tags.map((tag, i) => {     
                                         return (
-                                            <a href={`/tag/${tag.slug}`} title={tag.meta_title}>
+                                            <a href={`/tag/${tag.slug}`} title={tag.meta_title} key={i}>
                                                 {tag.name}
                                             </a>
                                         ) 

@@ -47,6 +47,7 @@
     "gatsby-plugin-catch-links": "2.1.26",
     "gatsby-plugin-feed": "2.3.27",
     "gatsby-plugin-force-trailing-slashes": "1.0.4",
+    "gatsby-plugin-gdpr-cookies": "^1.0.7",
     "gatsby-plugin-manifest": "2.2.42",
     "gatsby-plugin-offline": "3.0.35",
     "gatsby-plugin-react-helmet": "3.1.22",
@@ -54,10 +55,11 @@
     "gatsby-source-apiserver": "^2.1.4",
     "gatsby-source-filesystem": "2.1.48",
     "gatsby-source-ghost": "4.0.4",
-    "gatsby-transformer-sharp": "2.3.16",
     "gatsby-source-google-sheets": "^1.1.1",
+    "gatsby-transformer-sharp": "2.3.16",
     "lodash": "4.17.15",
     "react": "16.13.0",
+    "react-cookie-consent": "^3.0.0",
     "react-dom": "16.13.0",
     "react-helmet": "5.2.1"
   }

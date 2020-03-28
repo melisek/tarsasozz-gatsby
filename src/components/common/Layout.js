@@ -7,6 +7,8 @@ import Img from 'gatsby-image'
 import { Navigation } from '.'
 import config from '../../utils/siteConfig'
 
+import CookieConsent from 'react-cookie-consent'
+
 // Styles
 import '../../styles/app.css'
 
@@ -29,6 +31,25 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                 <style type="text/css">{`${site.codeinjection_styles}`}</style>
                 <body className={bodyClass} />
             </Helmet>
+
+            <CookieConsent
+                    location="bottom"
+                    style={{ background: "#444471" }}
+                    buttonStyle={{ background: "#82cecd" }}
+                    buttonClasses="btn"
+                    declineButtonClasses="btn"
+                    declineButtonStyle={{ background: "#dd708c" }}
+                    enableDeclineButton
+                    flipButtons
+                    buttonText="✔ Engedélyezem"
+                    declineButtonText="⨉ Elutasítom"
+                    cookieName="gatsby-gdpr-google-analytics">
+                        <div className="container">
+                        🍪 Weboldalunk sütiket (cookie-kat) tárol a számítógépeden. Ezek a sütik információt tárolnak arról, hogyan böngészed weboldalunkat, és lehetővé teszik, hogy visszatérő látogatóként azonosíthassunk.
+             Ezt az információt a weboldal felhasználói élményének fokozására, illetve látogatói analitika készítésére használjuk.
+              Amennyiben ezt elutasítod, a weboldal nem tárol információt rólad, csupán az elutasítás tényéről kerül egy süti mentésre a böngésződben. 
+                        </div>
+            </CookieConsent>
 
             <div className="viewport">
 

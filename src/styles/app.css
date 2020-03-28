@@ -1767,3 +1767,28 @@ section.play-card-content {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.cookieConsent .container {
+    padding-left: 11vw;
+    padding-right: 0;
+    font-size: .75em;
+}
+
+.cookieConsent > .btn {
+    font-weight: bold;
+    font-size: .75em;
+    border-radius: 8px!important;
+    padding: 8px!important;
+    color: #4e4e7d!important;
+}
+
+@media (max-width: 800px) {
+    .cookieConsent > div {
+        flex: 1 0 90%!important;
+        margin: 15px!important;
+    }
+    .cookieConsent .container {
+        padding-left: 10px;
+        width: 100%;
+    }
+}
