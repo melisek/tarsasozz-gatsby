@@ -1,10 +1,10 @@
 module.exports = {
-    'parser': 'babel-eslint',
-    'parserOptions': {
-        'ecmaVersion': 6,
-        'ecmaFeatures': {
-            'jsx': true,
-            'experimentalObjectRestSpread': true
+    parser: 'babel-eslint',
+    parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'module',
+        ecmaFeatures: {
+            'jsx': true
         }
     },
     plugins: ['ghost', 'react'],
@@ -13,7 +13,7 @@ module.exports = {
         'plugin:ghost/ember',
         'plugin:react/recommended'
     ],
-    "settings": {
+    settings: {
         "react": {
             "createClass": "createReactClass",
             "pragma": "React",
@@ -22,7 +22,7 @@ module.exports = {
         },
         "propWrapperFunctions": ["forbidExtraProps"]
     },
-    "rules": {
+    rules: {
         "ghost/sort-imports-es6-autofix/sort-imports-es6": "off",
         "ghost/ember/use-ember-get-and-set": "off",
         "no-console": "off",
@@ -56,8 +56,8 @@ module.exports = {
             }
         ]
     },
-    "globals": {
-        "globalThis": false, // false means it is not writeable.
+    globals: {
+        globalThis: false, // false means it is not writeable.
         // See https://github.com/eslint/eslint/issues/11553.
     },
 };

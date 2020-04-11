@@ -10,7 +10,6 @@ export default connectSearchBox(({ refine, ...rest }) => (
       placeholder="Keresés"
       aria-label="Keresés"
       onChange={e => refine(e.target.value)}
-      onMouseLeave={e => e.target.blur()}
       {...rest}
     />
     <SearchIcon />
