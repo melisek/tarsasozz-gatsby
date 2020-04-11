@@ -6,11 +6,10 @@ import Img from 'gatsby-image'
 
 import { ThemeProvider } from 'styled-components'
 import theme from '../../utils/theme'
-import { Search } from '../Search'
+import Search from '../search'
 import { Instagram, Facebook } from 'styled-icons/fa-brands'
 
 import { Navigation } from '.'
-import config from '../../utils/siteConfig'
 
 import CookieConsent from 'react-cookie-consent'
 
