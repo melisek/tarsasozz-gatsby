@@ -6,7 +6,7 @@ import Img from 'gatsby-image'
 
 import { ThemeProvider } from 'styled-components'
 import theme from '../../utils/theme'
-import Search from '../Search'
+import { Search } from '../Search'
 import { Instagram, Facebook } from 'styled-icons/fa-brands'
 
 import { Navigation } from '.'
