@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { window } from 'browser-monads'
 
 export function useEventListener(eventNames, handler, element = window) {
   // Create a ref that stores the handler.
