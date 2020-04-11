@@ -14,7 +14,7 @@ import { Navigation } from '.'
 import CookieConsent from 'react-cookie-consent'
 
 const searchIndices = [
-    { name: `dev_TARSASOZZ`, title: `Bejegyzések` },
+    { name: process.env.GATSBY_ALGOLIA_INDEX_NAME, title: `Bejegyzések` },
   ]
 
 // Styles
