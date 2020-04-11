@@ -20,7 +20,6 @@ const Index = ({ data, location, pageContext }) => {
     });
 
     const posts = data.allGhostPost.edges.filter(p => {
-        console.log(p.node);
         return (p.node.id !== featuredPost.node.id);
     });
 

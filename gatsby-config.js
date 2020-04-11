@@ -1,14 +1,16 @@
 const path = require(`path`)
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
 
 const config = require(`./src/utils/siteConfig`)
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
+const queries = require(`./src/utils/algolia`)
 
-let ghostConfig, bggConfig, googleSheetsConfig, bggEnv
+let ghostConfig
 
 try {
     ghostConfig = require(`./.ghost`)
-    bggConfig = require(`./.bgg`)
-    googleSheetsConfig = require(`./.google-sheets-config`)
 } catch (e) {
     ghostConfig = {
         production: {
@@ -16,28 +18,8 @@ try {
             contentApiKey: process.env.GHOST_CONTENT_API_KEY,
         },
     }
-    bggConfig = {
-        production: {
-            apiUrl: process.env.BGG_API_URL,
-            username: process.env.BGG_API_USERNAME,
-        },
-    }
-    googleSheetsConfig = {
-        type: "service_account",
-        project_id: process.env.GOOGLE_SHEETS_PROJECT_ID,
-        private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
-        private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY.replace(new RegExp('\\\\n', '\g'), '\n'),
-        client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-        client_id: process.env.GOOGLE_SHEETS_CLIENT_ID,
-        client_x509_cert_url: process.env.GOOGLE_SHEETS_CLIENT_CERT_URL,
-        auth_uri: "https://accounts.google.com/o/oauth2/auth",
-        token_uri: "https://oauth2.googleapis.com/token",
-        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-        spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID
-    }
 } finally {
     const { apiUrl, contentApiKey } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production;
-    bggEnv = process.env.NODE_ENV === `development` ? bggConfig.development : bggConfig.production
 
     if (!apiUrl || !contentApiKey || contentApiKey.match(/<key>/)) {
         throw new Error(`GHOST_API_URL and GHOST_CONTENT_API_KEY are required to build. Check the README.`) // eslint-disable-line
@@ -51,6 +33,7 @@ try {
 * Further info 👉🏼 https://www.gatsbyjs.org/docs/gatsby-config/
 *
 */
+
 module.exports = {
     siteMetadata: {
         siteUrl: config.siteUrl,
@@ -78,9 +61,20 @@ module.exports = {
         {
             resolve: 'gatsby-source-google-sheets',
             options: {
-                spreadsheetId: googleSheetsConfig.spreadsheetId,
-                worksheetTitle: 'Games',
-                credentials: googleSheetsConfig
+                spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
+                worksheetTitle: process.env.GOOGLE_SHEETS_WORKSHEET_NAME,
+                credentials: {
+                    type: "service_account",
+                    project_id: process.env.GOOGLE_SHEETS_PROJECT_ID,
+                    private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
+                    private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY.replace(new RegExp('\\\\n', '\g'), '\n'),
+                    client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+                    client_id: process.env.GOOGLE_SHEETS_CLIENT_ID,
+                    client_x509_cert_url: process.env.GOOGLE_SHEETS_CLIENT_CERT_URL,
+                    auth_uri: "https://accounts.google.com/o/oauth2/auth",
+                    token_uri: "https://oauth2.googleapis.com/token",
+                    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+                }
             }
         },
         {
@@ -97,7 +91,7 @@ module.exports = {
             options: {
                     typePrefix: "internal__",
                     // The url, this should be the endpoint you are attempting to pull data from
-                    url: `${bggEnv.apiUrl}mostplayed/${bggEnv.username}/`,
+                    url: `${process.env.BGG_API_URL}mostplayed/${process.env.BGG_API_USERNAME}/`,
                 
                     method: "get",
                 
@@ -155,6 +149,17 @@ module.exports = {
                     ? ghostConfig.development
                     : ghostConfig.production,
         },
+        {
+            resolve: `gatsby-plugin-algolia`,
+            options: {
+              appId: process.env.GATSBY_ALGOLIA_APP_ID,
+              apiKey: process.env.ALGOLIA_API_KEY,
+              indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
+              queries,
+              chunkSize: 10000, // default: 1000
+            },
+        },
+        `gatsby-plugin-styled-components`,
         /**
          *  Utility Plugins
          */

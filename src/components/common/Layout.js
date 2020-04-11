@@ -4,10 +4,19 @@ import Helmet from 'react-helmet'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
+import { ThemeProvider } from 'styled-components'
+import theme from '../../utils/theme'
+import Search from '../Search'
+import { Instagram, Facebook } from 'styled-icons/fa-brands'
+
 import { Navigation } from '.'
 import config from '../../utils/siteConfig'
 
 import CookieConsent from 'react-cookie-consent'
+
+const searchIndices = [
+    { name: `dev_TARSASOZZ`, title: `Bejegyzések` },
+  ]
 
 // Styles
 import '../../styles/app.css'
@@ -23,7 +32,7 @@ import '../../styles/app.css'
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const site = data.allGhostSettings.edges[0].node
     const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
-
+    const instagramUrl = `https://www.instagram.com/tarsasozz/`
     return (
         <>
             <Helmet>
@@ -79,8 +88,22 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                         </div>
                                     </nav>
 
-                                    { site.facebook && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
-                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+                                    <ThemeProvider theme={theme(false)}>
+                                        <Search collapse indices={searchIndices} />
+                                    </ThemeProvider>
+
+                                    {
+                                        <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                            <Facebook size="1em" />
+                                        </a>
+                                    }
+
+                                    {
+                                        <a href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                            <Instagram size="1em" />
+                                        </a>
+                                    }
+
                                 </div>
                             </div>
                             { isHome ?
