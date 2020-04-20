@@ -58,25 +58,25 @@ module.exports = {
                 name: `images`,
             },
         },
-        {
-            resolve: 'gatsby-source-google-sheets',
-            options: {
-                spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-                worksheetTitle: process.env.GOOGLE_SHEETS_WORKSHEET_NAME,
-                credentials: {
-                    type: "service_account",
-                    project_id: process.env.GOOGLE_SHEETS_PROJECT_ID,
-                    private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
-                    private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY.replace(new RegExp('\\\\n', '\g'), '\n'),
-                    client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-                    client_id: process.env.GOOGLE_SHEETS_CLIENT_ID,
-                    client_x509_cert_url: process.env.GOOGLE_SHEETS_CLIENT_CERT_URL,
-                    auth_uri: "https://accounts.google.com/o/oauth2/auth",
-                    token_uri: "https://oauth2.googleapis.com/token",
-                    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
-                }
-            }
-        },
+        // {
+        //     resolve: 'gatsby-source-google-sheets',
+        //     options: {
+        //         spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
+        //         worksheetTitle: process.env.GOOGLE_SHEETS_WORKSHEET_NAME,
+        //         credentials: {
+        //             type: "service_account",
+        //             project_id: process.env.GOOGLE_SHEETS_PROJECT_ID,
+        //             private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
+        //             private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY.replace(new RegExp('\\\\n', '\g'), '\n'),
+        //             client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+        //             client_id: process.env.GOOGLE_SHEETS_CLIENT_ID,
+        //             client_x509_cert_url: process.env.GOOGLE_SHEETS_CLIENT_CERT_URL,
+        //             auth_uri: "https://accounts.google.com/o/oauth2/auth",
+        //             token_uri: "https://oauth2.googleapis.com/token",
+        //             auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+        //         }
+        //     }
+        // },
         {
             resolve: `gatsby-plugin-sharp`, 
             options: {
@@ -87,21 +87,26 @@ module.exports = {
             },
         },
         {
-            resolve: "gatsby-source-apiserver",
+            resolve: `gatsby-source-apiserver`,
             options: {
                     typePrefix: "internal__",
-                    // The url, this should be the endpoint you are attempting to pull data from
-                    url: `${process.env.BGG_API_URL}mostplayed/${process.env.BGG_API_USERNAME}/`,
-                
                     method: "get",
-                
                     headers: {
                         "Content-Type": "application/json"
                     },
-
-                    name: `mostPlayedGames`,
+                    entitiesArray: [
+                        {  
+                            url: `${process.env.BGG_API_URL}mostplayed/${process.env.BGG_API_USERNAME}/`,
+                            name: `mostPlayedGames`
+                        },
+                        {
+                            url: `https://tarsasozz-wizard.azurewebsites.net/wizard/list`,
+                            name: `gameData`
+                        }
+                    ]
             }
         },
+        
         // {
         //     resolve: "gatsby-source-apiserver",
         //     options: {
@@ -160,6 +165,22 @@ module.exports = {
             },
         },
         `gatsby-plugin-styled-components`,
+        {
+            resolve: `gatsby-plugin-prefetch-google-fonts`,
+            options: {
+                fonts: [
+                    {
+                        family: `Poppins`,
+                        variants: [`700`],
+                        subsets: [`latin-ext`]
+                    },
+                    {
+                        family: `Noto Serif`,
+                        subsets: [`latin-ext`]
+                    }
+                ],
+            },
+        },
         /**
          *  Utility Plugins
          */

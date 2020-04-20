@@ -80,6 +80,7 @@ export const HitsWrapper = styled.div`
   max-width: 30em;
   box-shadow: 0 0 5px 0 #3c3b66;
   padding: 0.7em 1em 0.4em;
+  font-family: var(--font-serif);
   border-radius: ${props => props.theme.mediumBorderRadius};
   * {
     margin-top: 0;

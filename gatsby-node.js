@@ -55,15 +55,6 @@ exports.createPages = async ({ graphql, actions }) => {
                     }
                 }
             }
-            allGoogleSheetGamesRow {
-                edges {
-                  node {
-                    bggId
-                    slug
-                    title
-                  }
-                }
-            }
         }
     `)
 
@@ -77,7 +68,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const authors = result.data.allGhostAuthor.edges
     const pages = result.data.allGhostPage.edges
     const posts = result.data.allGhostPost.edges
-    const games = result.data.allGoogleSheetGamesRow.edges
+    //const games = result.data.allInternalGameData.edges
 
     // Load templates
     const indexTemplate = path.resolve(`./src/templates/index.js`)
@@ -172,20 +163,28 @@ exports.createPages = async ({ graphql, actions }) => {
         })
     })
 
+    const bggIdTagPrefix = 'hash-bgg-';
+
     // Create pages
     pages.forEach(({ node }) => {
         // This part here defines, that our pages will use
         // a `/:slug/` permalink.
         node.url = `/${node.slug}/`
 
-        let pageTagSlugs = new Array();
-        let gameId
+        let bggIdTag = null
+        let bggId = null
 
         if (node.featured)
         {
             const internalPageTags = node.tags.filter(tag => tag.visibility === "internal");
             pageTagSlugs = Array.from(internalPageTags, tag => tag.slug);
-            //gameId = games.find(g => g.node.slug === node.slug).bggId;
+            bggIdTag = pageTagSlugs.find(slug => slug.startsWith(bggIdTagPrefix));
+
+            if (bggIdTag) {
+                let startIndex = bggIdTag.indexOf(bggIdTagPrefix) + bggIdTagPrefix.length
+                let bggIdStr = bggIdTag.substring(startIndex)
+                bggId = Number(bggIdStr)
+            }
         }
 
         createPage({
@@ -195,12 +194,13 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
-                tags: pageTagSlugs,
-                //gameId: gameId
+                bggIdTag: bggIdTag,
+                bggId: bggId
             },
         })
     })
 
+    
     // Create post pages
     posts.forEach(({ node }) => {
         // This part here defines, that our posts will use
@@ -210,6 +210,16 @@ exports.createPages = async ({ graphql, actions }) => {
         const internalPostTags = node.tags.filter(tag => tag.visibility === "internal");
         const postTagSlugs = Array.from(internalPostTags, tag => tag.slug);
 
+        const bggIdTags = postTagSlugs.filter(slug => slug.startsWith(bggIdTagPrefix));
+        let bggIds = new Array();
+        if (bggIdTags !== null && bggIdTags !== undefined && bggIdTags.length > 0) {
+            bggIdTags.forEach(bggIdTag => {
+                let startIndex = bggIdTag.indexOf(bggIdTagPrefix) + bggIdTagPrefix.length
+                let bggIdStr = bggIdTag.substring(startIndex)
+                bggIds.push(Number(bggIdStr))
+            });
+        }
+
         createPage({
             path: node.url,
             component: postTemplate,
@@ -217,7 +227,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
-                tags: postTagSlugs
+                tags: postTagSlugs,
+                bggIdTags: bggIdTags,
+                bggIds: bggIds
             },
         })
     })

@@ -9,7 +9,7 @@ import '../../styles/app.css'
 
 const PlayList = ({ data }) => {
     const plays = data.allInternalMostPlayedGames.edges
-    const games = data.allGoogleSheetGamesRow.edges
+    const games = data.allInternalGameData.edges
     const pages = data.allGhostPage.edges
 
     return (
@@ -35,7 +35,7 @@ const PlayList = ({ data }) => {
 PlayList.propTypes = {
     data: PropTypes.shape({
         allInternalMostPlayedGames: PropTypes.object.isRequired,
-        allGoogleSheetGamesRow: PropTypes.object.isRequired,
+        allInternalGameData: PropTypes.object.isRequired,
         allGhostPage: PropTypes.object.isRequired,
     }).isRequired,
 }
@@ -55,7 +55,7 @@ const PlayListQuery = props => (
                       }
                     }
                 }
-                allGoogleSheetGamesRow {
+                allInternalGameData {
                     edges {
                       node {
                         bggId

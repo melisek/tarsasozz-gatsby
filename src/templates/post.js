@@ -7,6 +7,7 @@ import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 import AuthorCard from '../components/common/AuthorCard'
 import PostCard from '../components/common/PostCard'
+import GameDataCard from '../components/common/GameDataCard'
 import { Tags } from '@tryghost/helpers-gatsby'
 import Img from 'gatsby-image'
 
@@ -23,6 +24,7 @@ const Post = ({ data, location }) => {
     const public_tags = post.tags.filter(t => {
         return t.visibility === "public"
     });
+    const gamesData = data.allInternalGameData.edges;
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
     const author = post.primary_author;
@@ -45,9 +47,9 @@ const Post = ({ data, location }) => {
                             </figure> 
                             : null 
                         }
+                        
                         <section className="post-full-content">
                             <h1 className="content-title">{post.title}</h1>
-
                             <div className="content-header">
                                 {author.profile_image ?
                                     <a href={`/author/${author.slug}`} title={author.name}>
@@ -84,34 +86,39 @@ const Post = ({ data, location }) => {
                             />
 
                         </section>
-
                     </article>
 
                     <footer className="post-footer">
-                        <AuthorCard author={post.primary_author} />
-
-                            {
-                                relatedFeaturedPages.map(({ node }) => (
-                                    <div className="featured-page-item"> 
-                                        {
-                                            node.feature_image &&
-                                            <Link to={node.slug} title={node.title}><div className="page-card-image" style={{
-                                                    backgroundImage: `url(${node.feature_image})` ,
-                                                }}></div>
-                                            </Link>
-                                        }
-                                        
-                                        <Link to={node.slug} title={node.title}><h3>{node.title}</h3></Link>
-                                    </div>
-                                ))
-                            }
-
+                        {
+                            post.authors.map(author => (
+                                <AuthorCard author={author} key={author.id} />
+                            ))
+                        }
                     </footer>
 
+                    <section>
+                        <h2 className="sub-title">
+                            A bejegyzésben szereplő {
+                                gamesData.length > 1 
+                                ? `társasjátékok`
+                                : `társasjáték`
+                            }
+                            </h2>
+                        <section className="play-feed">
+                            {
+                                gamesData.map(({ node }) => {
+                                    let gameDataSlug = node.slug;
+                                    let page = relatedFeaturedPages.find(p => p.node.slug === gameDataSlug);
+
+                                    return <GameDataCard data={node} page={page} key={node.bggId} />
+                                })
+                            }
+                        </section>
+                    </section>
                     {
                         relatedPosts.length !== 0 ? 
                             <section>
-                                <h2>Hasonló társasjátékok</h2>
+                                <h2 className="sub-title">Kapcsolódó bejegyzések</h2>
 
                                 <section className="post-feed">
                                     {relatedPosts.map(({ node }) => (
@@ -137,7 +144,8 @@ Post.propTypes = {
             feature_image: PropTypes.string,
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
-        allGhostPage: PropTypes.object.isRequired
+        allGhostPage: PropTypes.object.isRequired,
+        allInternalGameData: PropTypes.object.isRequired
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -145,7 +153,7 @@ Post.propTypes = {
 export default Post
 
 export const postQuery = graphql`
-    query($slug: String!, $tags: [String!]) {
+    query($slug: String!, $tags: [String!], $bggIdTags: [String], $bggIds: [Int]) {
         ghostPost(slug: { eq: $slug }) {
             ...GhostPostFields
             localFeatureImage {
@@ -178,12 +186,29 @@ export const postQuery = graphql`
         }
         allGhostPage(
             sort: { order: ASC, fields: [title] },
-            filter: { featured: {eq: true}, tags: {elemMatch: {slug: {in: $tags} } } }
+            filter: { featured: {eq: true}, tags: {elemMatch: {slug: {in: $bggIdTags} } } }
             ) {
             edges {
                 node {
                     ...GhostPageFields
+                    ...GatsbyImageSharpSinglePage
                 }
+            }
+        }
+        allInternalGameData(filter: {bggId: {in: $bggIds }}) {
+            edges {
+              node {
+                bggId
+                slug
+                title
+                minPlayers
+                maxPlayers
+                minTime
+                maxTime
+                age
+                bggRating
+                complexity
+              }
             }
         }
     }

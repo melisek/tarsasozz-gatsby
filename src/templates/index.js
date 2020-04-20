@@ -15,13 +15,12 @@ import { MetaData } from '../components/common/meta'
 */
 const Index = ({ data, location, pageContext }) => {
 
-    const featuredPost = data.allGhostPost.edges.find(p => {
-        return (p.node.featured);
-    });
+    const featuredPost = data.ghostPost
+    const posts = data.allGhostPost.edges
 
-    const posts = data.allGhostPost.edges.filter(p => {
-        return (p.node.id !== featuredPost.node.id);
-    });
+    // .filter(p => {
+    //     return (featuredPost === undefined || featuredPost === null ||  p.node.id !== featuredPost.node.id);
+    // });
 
     return (
         <>
@@ -29,9 +28,13 @@ const Index = ({ data, location, pageContext }) => {
             <Layout isHome={true}>
                 <div className="container">
                     <section className="post-feed">
-                        <div className="post-card-featured">
-                            <PostCard key={featuredPost.node.id} post={featuredPost.node} featured={true} />
-                        </div>
+                        {
+                            featuredPost &&
+                            <div className="post-card-featured">
+                                <PostCard key={featuredPost.id} post={featuredPost} featured={true} />
+                            </div>
+                        }
+
                         {posts.map(({ node }) => (
                             // The tag below includes the markup for each post - components/common/PostCard.js
                             <PostCard key={node.id} post={node} />
@@ -48,6 +51,7 @@ const Index = ({ data, location, pageContext }) => {
 Index.propTypes = {
     data: PropTypes.shape({
         allGhostPost: PropTypes.object.isRequired,
+        ghostPost: PropTypes.object.isRequired
     }).isRequired,
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
@@ -63,6 +67,7 @@ export const pageQuery = graphql`
   query GhostPostQuery($limit: Int!, $skip: Int!) {
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
+        filter: { featured: {eq: false} },
         limit: $limit,
         skip: $skip
     ) {
@@ -72,6 +77,10 @@ export const pageQuery = graphql`
           ...GatsbyImageSharpPostCard
         }
       }
+    }
+    ghostPost(featured: { eq: true }) {
+        ...GhostPostFields
+        ...GatsbyImageSharpSinglePost
     }
   }
 `

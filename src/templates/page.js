@@ -9,6 +9,9 @@ import PlayCard from '../components/common/PlayCard'
 import { MetaData } from '../components/common/meta'
 import Img from 'gatsby-image'
 
+import { Cog, Cogs } from 'styled-icons/fa-solid'
+import { Cogs as IcoCogs } from 'styled-icons/icomoon' 
+
 /**
 * Single page (/:slug)
 *
@@ -21,7 +24,9 @@ const Page = ({ data, location }) => {
     const featuredImage = data.ghostPage.localFeatureImage ? data.ghostPage.localFeatureImage.childImageSharp.fluid : null;
 
     // const plays = data.allInternalPlays.edges
-    const games = data.allGoogleSheetGamesRow.edges
+    const games = data.allInternalGameData.edges
+
+    const complexity = [ "Könnyű", "Normál", "Nehéz"];
 
     return (
         <>
@@ -43,16 +48,44 @@ const Page = ({ data, location }) => {
 
                             <article className="content col-2">
                                 <div className="featured-page-full-content">
-                                    <h1 className="content-title">{page.title}</h1>
+                                    {games.map(({ node, index }) => (
+                                        <div key={index} className="game-data-wrapper">
+                                            {page.tags.filter(t => !t.slug.startsWith('hash-')).map((tag) => (
+                                                <a className="game-category" id={tag.slug} key={tag.slug} href={`/tag/${tag.slug}/`}>{tag.name}</a>
+                                            ))}
 
-                                    {games.map(({ node }) => (
-                                        <div key={node.id}>
-                                            <div className="game-icon icon-players" aria-hidden="true"></div>
-                                            <p>{node.minPlayers} - {node.maxPlayers} játékos</p>
-                                            <div className="game-icon icon-time" aria-hidden="true"></div>
-                                            <p> {node.minTime} { node.maxTime != null ? `- ${node.maxTime}` : null } perc játékidő</p>
-                                            <div className="game-icon icon-age" aria-hidden="true"></div>
-                                            <p> {node.age}+ éves kortól</p>
+                                        <h1 className="content-title">{page.title}</h1>
+
+                                        <p className="game-excerpt">{page.excerpt}</p>
+
+                                        <div className="game-data-grid">
+                                            <div>
+                                                <div className="game-icon icon-complexity" aria-hidden="true">
+                                                    {
+                                                    node.complexity === 1 ?
+                                                        <Cog size="1.25em" />
+                                                    : (node.complexity === 2 ?
+                                                        <IcoCogs size="1.25em" />
+                                                        :
+                                                        <Cogs size="1.25em" />
+                                                    )
+                                                    }
+                                                </div>
+                                                <span className="game-data">{complexity[node.complexity - 1]}</span>
+                                            </div>
+                                            <div>
+                                                <div className="game-icon icon-players" aria-hidden="true"></div>
+                                                <span className="game-data">{node.minPlayers}-{node.maxPlayers} játékos</span>
+                                            </div>
+                                            <div>
+                                                <div className="game-icon icon-time" aria-hidden="true"></div>
+                                                <span className="game-data">{node.minTime}{ node.maxTime != null ? `-${node.maxTime}` : null } perc játékidő</span>
+                                            </div>
+                                            <div>
+                                                <div className="game-icon icon-age" aria-hidden="true"></div>
+                                                <span className="game-data">{node.age}+ éves kortól</span>
+                                           </div>
+                                        </div>
                                         </div>
                                     ))}
 
@@ -62,7 +95,7 @@ const Page = ({ data, location }) => {
                                 relatedPosts.length !== 0 ? 
 
                                     <article className="col-3">
-                                        <h2>Itt írtunk a játékról:</h2>
+                                        <h2 className="sub-title">Itt írtunk a játékról:</h2>
 
                                         <section className="post-feed">
                                             {relatedPosts.map(({ node }) => (
@@ -118,7 +151,7 @@ Page.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         //allInternalPlays: PropTypes.object.isRequired,
-        allGoogleSheetGamesRow: PropTypes.object.isRequired,
+        allInternalGameData: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -143,7 +176,7 @@ Page.propTypes = {
 export default Page
 
 export const postQuery = graphql`
-    query($slug: String!, $tags: [String!]) {
+    query($slug: String!, $bggIdTag: String, $bggId: Int) {
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
             ...GatsbyImageSharpSinglePage
@@ -151,7 +184,7 @@ export const postQuery = graphql`
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
             limit: 3,
-            filter: { tags: {elemMatch: {slug: {in: $tags} } }}
+            filter: { tags: {elemMatch: {slug: {eq: $bggIdTag } } }}
         ) {
           edges {
             node {
@@ -161,7 +194,7 @@ export const postQuery = graphql`
           }
         }
         
-        allGoogleSheetGamesRow(filter: {slug: {eq: $slug }}) {
+        allInternalGameData(filter: {bggId: {eq: $bggId }}) {
             edges {
               node {
                 bggId
@@ -173,6 +206,7 @@ export const postQuery = graphql`
                 maxTime
                 age
                 bggRating
+                complexity
               }
             }
         }
