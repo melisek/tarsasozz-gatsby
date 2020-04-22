@@ -6,7 +6,10 @@ const postsQuery = `{
           title
           slug
           excerpt
-          plaintext
+          meta_title
+          meta_description
+          og_description
+          og_title
           localFeatureImage {
             childImageSharp {
                 fluid(
