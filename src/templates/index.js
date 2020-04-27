@@ -18,10 +18,6 @@ const Index = ({ data, location, pageContext }) => {
     const featuredPost = data.ghostPost
     const posts = data.allGhostPost.edges
 
-    // .filter(p => {
-    //     return (featuredPost === undefined || featuredPost === null ||  p.node.id !== featuredPost.node.id);
-    // });
-
     return (
         <>
             <MetaData location={location} />
