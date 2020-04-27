@@ -52,6 +52,7 @@
     "gatsby-plugin-force-trailing-slashes": "1.0.4",
     "gatsby-plugin-gdpr-cookies": "^1.0.7",
     "gatsby-plugin-manifest": "2.2.42",
+    "gatsby-plugin-netlify": "^2.3.0",
     "gatsby-plugin-offline": "3.0.35",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "3.1.22",

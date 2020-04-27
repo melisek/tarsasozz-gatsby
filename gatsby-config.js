@@ -181,6 +181,7 @@ module.exports = {
                 ],
             },
         },
+        `gatsby-plugin-netlify`,
         /**
          *  Utility Plugins
          */
