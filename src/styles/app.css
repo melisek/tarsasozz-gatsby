@@ -29,6 +29,7 @@ what's here to work the way you'd like it to.
     --color-bg: #efeffd;
 
     --color-dark-turquoise: #42799b;
+    --color-light-turquoise: #82cecd;
     --color-flat-red: #dd708c;
     --color-gold: #edbf2e;
 
@@ -640,9 +641,9 @@ h6 {
 }
 
 .game-category#kooperativ-tarsasjatekok {
-    background-color: #82cecd;
+    background-color: var(--color-light-turquoise);
     color: #444471;
-    border-color: #82cecd;
+    border-color: var(--color-light-turquoise);
 }
 
 .game-category#party-tarsasjatekok {
@@ -1064,7 +1065,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .site-banner-category#kooperativ {
     background-image: url("/images/kooperativ.svg");
-    background-color: #82cecd;
+    background-color: var(--color-light-turquoise);
     background-size: 100px;
     background-position: center;
 }
