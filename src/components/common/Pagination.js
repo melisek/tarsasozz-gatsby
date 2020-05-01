@@ -11,7 +11,7 @@ const Pagination = ({ pageContext }) => {
             <div className="pagination-wrapper">
                 {previousPagePath && (
 
-                        <Link to={previousPagePath} rel="prev">
+                        <Link to={previousPagePath} rel="prev" class="btn">
                                 <ArrowIosBackOutline size="1.25em" />
                                 Újabb bejegyzések
                         </Link>
@@ -20,7 +20,7 @@ const Pagination = ({ pageContext }) => {
                 
                 {nextPagePath && (
 
-                        <Link to={nextPagePath} rel="next">
+                        <Link to={nextPagePath} rel="next" className="btn">
                                 Régebbi bejegyzések <ArrowIosForwardOutline size="1.25em" />
                         </Link>
                 )}

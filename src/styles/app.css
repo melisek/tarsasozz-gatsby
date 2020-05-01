@@ -28,6 +28,10 @@ what's here to work the way you'd like it to.
     --color-border: #c7d5d8;
     --color-bg: #efeffd;
 
+    --color-dark-turquoise: #42799b;
+    --color-flat-red: #dd708c;
+    --color-gold: #edbf2e;
+
     /* Fonts */
     --font-sans-serif: 'Poppins', sans-serif;
     --font-serif: 'Noto Serif', serif;
@@ -444,7 +448,7 @@ blockquote cite a {
 }
 
 a {
-    color: #26a8ed;
+    color: var(--color-dark-turquoise);
     text-decoration: none;
 }
 
@@ -624,15 +628,15 @@ h6 {
 }
 
 .game-category#strategiai-tarsasjatekok {
-    background-color: #42799b;
-    border-color: #42799b;
+    background-color: var(--color-dark-turquoise);
+    border-color: var(--color-dark-turquoise);
     color: #ffffff;
 }
 
 .game-category#csaladi-tarsasjatekok {
-    background-color: #edbf2e;
+    background-color: var(--color-gold);
     color: #444471;
-    border-color: #edbf2e;
+    border-color: var(--color-gold);
 }
 
 .game-category#kooperativ-tarsasjatekok {
@@ -642,9 +646,9 @@ h6 {
 }
 
 .game-category#party-tarsasjatekok {
-    background-color: #dd708c;
+    background-color: var(--color-flat-red);
     color: #444471;
-    border-color: #dd708c;
+    border-color: var(--color-flat-red);
 }
 
 
@@ -684,6 +688,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     min-height: 148px;
     box-shadow: rgba(0,0,0,.1) 0px 1px 4px, rgba(0,0,0,.1) 0px 0px 0px 1px;
     border-radius: 8px;
+    background-color: #fdfeff;
 }
 .kg-bookmark-content {
     display: flex;
@@ -717,6 +722,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     line-height: 1.4;
     margin-top: 12px;
     overflow-y: hidden;
+    font-family: var(--font-serif);
 }
 
 .kg-bookmark-title {
@@ -733,6 +739,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     font-weight: 400;
     color: #9b9b9b;
     margin-top: 14px;
+    font-family: var(--font-serif);
 }
 
 .kg-bookmark-icon {
@@ -1038,7 +1045,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 .site-banner-category#csaladi {
     background-image: url("/images/csaladi.svg");
     grid-area: wide1;
-    background-color: #edbf2e;
+    background-color: var(--color-gold);
     background-size: 210px;
     right:0
 }
@@ -1046,12 +1053,12 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 .site-banner-category#party {
     background-image: url("/images/party.svg");
     grid-area: wide2;
-    background-color: #dd708c;
+    background-color: var(--color-flat-red);
 }
 
 .site-banner-category#strategiai {
     background-image: url("/images/strategiai.svg");
-    background-color: #42799b;
+    background-color: var(--color-dark-turquoise);
     background-size: 120px;
 }
 
@@ -1067,7 +1074,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 }
 
 .site-banner-green {
-    background-color: #42799b;
+    background-color: var(--color-dark-turquoise);
 }
 
 .site-banner-category#strategiai .site-banner-category-title { 
@@ -1212,6 +1219,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     justify-content: center;
     grid-gap: 2em;
     grid-template-columns: 1fr 1fr;
+    margin-top: 60px;
 }
 
 @media (max-width: 680px) {
@@ -1230,11 +1238,15 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .author-card, .featured-page-card {
     background-color: #fff;
-    margin: 60px auto;
     text-align: center;
     width: 100%;
 }
-.content-author-image {
+
+.featured-page-card {
+    margin: 60px auto;
+}
+
+.content-author-image, .author-card-badge {
     width: 40px;
     height: 40px;
     background-position: top center;
@@ -1242,14 +1254,43 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     border-radius: 50%;
     float:left;
 }
-.author-card .content-author-image {
-    margin: -35px auto 30px;
+.author-card .content-author-image, .author-card-badge {
+    /* margin: -35px auto 30px; */
     width: 70px;
     height: 70px;
-    float: none;
+    float: left;
 }
 .author-card a:hover {
     text-decoration:none
+}
+
+.author-card-badge {
+    float:right;
+}
+
+.author-card-badge.mark {
+    background: var(--color-gold) url(/images/kamera.svg) center center/ 60px 60px no-repeat;
+}
+.author-card-badge.anna {
+    background: var(--color-flat-red) url(/images/ceruza.svg) center center/ 60px 60px no-repeat;
+}
+
+.author-card-wrapper {
+    margin: 1em;
+    background: var(--color-bg) url(/images/author-card-bg.svg) center/100px;
+    border-radius: 8px;
+    padding: 1em;
+    min-height: 270px;
+}
+
+.author-card-bio {
+    clear:both;
+    padding-top: 1em;
+}
+
+.author-card h4 {
+    margin-top: 0;
+    padding: 2em;
 }
 
 @media (max-width: 680px) {
@@ -1315,6 +1356,10 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .post-card-featured .post-card-excerpt {
     padding: 0 40px 0 40px;
+}
+
+.post-card-featured .post-card {
+    width: 100%;
 }
 
 section.play-card-content {
@@ -1704,6 +1749,28 @@ section.play-card-content {
 }
 
 
+.btn {
+    border: var(--color-base) 2px solid;
+    border-radius: var(--radius);
+    color: var(--color-base);
+
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 1em;
+
+    text-decoration: none;
+    font-family: var(--font-sans-serif);
+    font-size: 1.4rem;
+    line-height: 1em;
+}
+
+
+.btn:hover {
+    background: #444471;
+    color: #e8f2f7;
+    text-decoration: none;
+}
+
 /* Pagination
 /* ---------------------------------------------------------- */
 
@@ -1718,24 +1785,6 @@ section.play-card-content {
 
 .pagination-wrapper {
     margin: 0 auto;
-}
-
-.pagination a {
-    display: inline-block;
-    padding: 10px 15px;
-    border: var(--color-base) 2px solid;
-    color: var(--color-base);
-    text-decoration: none;
-    font-family: var(--font-sans-serif);
-    font-size: 1.4rem;
-    line-height: 1em;
-    border-radius: var(--radius);
-    margin: 0 1em;
-}
-
-.pagination a:hover {
-    background: #444471;
-    color: #e8f2f7;
 }
 
 .pagination-location {
@@ -1826,7 +1875,7 @@ section.play-card-content {
 }
 
 .kg-bookmark-container:hover .kg-bookmark-title {
-    color: var(--color-primary);
+    color: var(--color-dark-turquoise);
 }
 
 .kg-bookmark-description {

@@ -90,8 +90,8 @@ const Post = ({ data, location }) => {
 
                     <footer className="post-footer">
                         {
-                            post.authors.map(author => (
-                                <AuthorCard author={author} key={author.id} />
+                            post.authors.map((author, i) => (
+                                <AuthorCard author={author} key={i} />
                             ))
                         }
                     </footer>

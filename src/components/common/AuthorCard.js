@@ -5,15 +5,20 @@ const AuthorCard = ({ author }) => {
     const url = `/author/${author.slug}`;
     return (
         <div className="author-card">
-                {author.profile_image ?
-                    <a href={url} title={author.name}>
-                        <div className="content-author-image" style={{backgroundImage: `url(${author.profile_image})`}}></div>
-                    </a>
-                    : null
-                }
-                <a href={url} title={author.name}><h4>{author.name}</h4></a>
-                <p>{author.bio}</p>
-                <p><a href={author.website} title="BoardGameGeek profil" target="_blank">BGG</a></p>
+            <div className="author-card-wrapper">
+                <div>
+                    {author.profile_image ?
+                        <a href={url} title={author.name}>
+                            <div className="content-author-image" style={{backgroundImage: `url(${author.profile_image})`}}></div>
+                        </a>
+                        : null
+                    }
+                    <div className={`author-card-badge ${author.slug}`}></div>
+                    <a href={url} title={author.name}><h4>{author.name}</h4></a>
+                </div>
+                <p className="author-card-bio">{author.bio}</p>
+                <p><a href={author.website} title="BoardGameGeek profil" className="btn" target="_blank">BoardGameGeek</a></p>
+            </div>
         </div>
     )
 }
