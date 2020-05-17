@@ -140,10 +140,29 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                     <footer className="site-foot">
                         <div className="site-foot-nav container">
                             <div className="site-foot-nav-left">
+                                <Link to="/">
+                                    {site.logo ?
+                                        <img className="site-logo" src={site.logo} alt={site.title} />
+                                        : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
+                                    }
+                                </Link><br/>
                                 <Link to="/">{site.title}</Link> © 2020
                             </div>
-                            <div className="site-foot-nav-right">
+                            <div className="site-foot-nav-center">
                                 <Navigation data={site.navigation} navClass="site-foot-nav-item" />
+
+                            </div>
+                            <div className="site-foot-nav-right">
+                                {
+                                    <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                        <Facebook size="1.5em" />
+                                    </a>
+                                }
+                                {
+                                    <a href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                        <Instagram size="1.5em" />
+                                    </a>
+                                }
                             </div>
                         </div>
                     </footer>

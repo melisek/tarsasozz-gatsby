@@ -1604,8 +1604,9 @@ section.play-card-content {
     grid-gap: 30px;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
-        ". col2 col2"
-        "col3 col3 col3";
+        ". gameinfo gameinfo"
+        "post gallery gallery"
+        "post gallery gallery";
 }
 
 @media (max-width: 680px) {
@@ -1619,12 +1620,26 @@ section.play-card-content {
     }
 }
 
-.featured-page-grid .col-3 {
-    grid-area: col3;
+.featured-page-grid .col-post {
+    grid-area: post;
 }
 
-.featured-page-grid .col-2 {
-    grid-area: col2;
+.featured-page-grid .col-post .post-feed {
+    grid-template-columns: 1fr;
+    grid-template-areas: ".";
+}
+
+.featured-page-grid .col-gameinfo {
+    grid-area: gameinfo;
+}
+
+.featured-page-grid .col-gallery {
+    grid-area: gallery;
+    padding-left: 7.5%;
+}
+
+.featured-page-grid .col-gallery .gallery-container {
+    padding-top: 2em;
 }
 
 .featured-page-grid .content {
@@ -1824,12 +1839,14 @@ section.play-card-content {
     color: rgba(255,255,255,1);
 }
 
-.site-foot-nav-right a {
+.site-foot-nav-center a {
     display: inline-block;
-    padding: 2px 5px;
+    padding: 0 1em;
+    font-size: 1.25em;
+    font-family: var(--font-sans-serif);
 }
 
-.site-foot-nav-right a:last-child {
+.site-foot-nav-center a:last-child {
     padding-right: 0;
 }
 

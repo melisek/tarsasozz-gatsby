@@ -46,7 +46,7 @@ const Page = ({ data, location }) => {
                                 <Img fluid={featuredImage} alt={page.title} />
                             </figure> 
 
-                            <article className="content col-2">
+                            <article className="content col-gameinfo">
                                 <div className="featured-page-full-content">
                                     {games.map(({ node, index }) => (
                                         <div key={index} className="game-data-wrapper">
@@ -94,7 +94,7 @@ const Page = ({ data, location }) => {
                             {
                                 relatedPosts.length !== 0 ? 
 
-                                    <article className="col-3">
+                                    <article className="col-post">
                                         <h2 className="sub-title">Itt írtunk a játékról:</h2>
 
                                         <section className="post-feed">
@@ -104,6 +104,17 @@ const Page = ({ data, location }) => {
                                         </section>
                                     </article>
 
+                                : null
+                            }
+                            {
+                                page.html ?
+                                    <section className="col-gallery">
+                                        <h2 className="sub-title">Képeink:</h2>
+                                        <section
+                                            className="gallery-container load-external-scripts"
+                                            dangerouslySetInnerHTML={{ __html: page.html }}
+                                        />
+                                    </section>
                                 : null
                             }
 

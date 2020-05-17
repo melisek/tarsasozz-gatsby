@@ -71,7 +71,7 @@ const Post = ({ data, location }) => {
                                     {public_tags.map((tag, i) => {     
                                         return (
                                             <a href={`/tag/${tag.slug}`} title={tag.meta_title} key={i}>
-                                                {tag.name}
+                                                {tag.name} &nbsp; 
                                             </a>
                                         ) 
                                     })}
