@@ -88,22 +88,30 @@ const Post = ({ data, location }) => {
                         </section>
                     </article>
 
-                    <footer className="post-footer">
-                        {
-                            post.authors.map((author, i) => (
-                                <AuthorCard author={author} key={i} />
-                            ))
-                        }
-                    </footer>
+                    {
+                        gamesData.length !== 0 &&
+                    
+                        <footer className="post-footer">
+                            {
+                                post.authors.map((author, i) => (
+                                    <AuthorCard author={author} key={i} />
+                                ))
+                            }
+                        </footer>
+                    }
 
                     <section>
-                        <h2 className="sub-title">
+                        {
+                            gamesData.length !== 0 &&
+                        
+                            <h2 className="sub-title">
                             A bejegyzésben szereplő {
                                 gamesData.length > 1 
                                 ? `társasjátékok`
                                 : `társasjáték`
                             }
                             </h2>
+                        }
                         <section className="play-feed">
                             {
                                 gamesData.map(({ node }) => {
