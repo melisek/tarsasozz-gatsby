@@ -148,10 +148,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                 </Link><br/>
                                 <Link to="/">{site.title}</Link> © 2020
                             </div>
+                            
                             <div className="site-foot-nav-center">
                                 <Navigation data={site.navigation} navClass="site-foot-nav-item" />
-
                             </div>
+
                             <div className="site-foot-nav-right">
                                 {
                                     <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">

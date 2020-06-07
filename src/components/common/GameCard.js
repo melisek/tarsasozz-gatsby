@@ -25,7 +25,7 @@ const GameCard = ({ play, page, title }) => {
                 <div className="play-card-image">
                     { gameHasPage
                         ? <Img fluid={page.node.localFeatureImage.childImageSharp.fluid} alt={gameTitle} />
-                        : <img src={play.image} alt={gameTitle} />
+                        : <img src={play.thumbnail} alt={gameTitle} />
                     }
                 </div>
                 <div className="play-card-head">
