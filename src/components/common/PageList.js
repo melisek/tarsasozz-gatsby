@@ -12,12 +12,13 @@ const PageList = ({ data }) => {
     return (
         <>
             <section className="page-list">
-                <h2>Kiemelt társasjátékok</h2>
+                <h2 className="home-title" style={{color: 'var(--color-bg)' }}>Polcunk</h2>
                 <div className="page-list__container">
 
                     {featuredPages.map(({ node, i }) => (
-                        <a href={node.slug} title={node.title} key={i}>
-                            <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} />
+                        <a href={node.slug} title={node.title} key={i} className="featured-page-card">
+                            <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} className="featured-page-card-img" />
+                            <p className="featured-page-card-excerpt">{node.excerpt}</p>
                         </a>
                     ))}
 

@@ -32,6 +32,7 @@ what's here to work the way you'd like it to.
     --color-light-turquoise: #82cecd;
     --color-flat-red: #dd708c;
     --color-gold: #edbf2e;
+    --color-purple: #444471;
 
     /* Fonts */
     --font-sans-serif: 'Poppins', sans-serif;
@@ -636,19 +637,19 @@ h6 {
 
 .game-category#csaladi-tarsasjatekok {
     background-color: var(--color-gold);
-    color: #444471;
+    color: var(--color-purple);
     border-color: var(--color-gold);
 }
 
 .game-category#kooperativ-tarsasjatekok {
     background-color: var(--color-light-turquoise);
-    color: #444471;
+    color: var(--color-purple);
     border-color: var(--color-light-turquoise);
 }
 
 .game-category#party-tarsasjatekok {
     background-color: var(--color-flat-red);
-    color: #444471;
+    color: var(--color-purple);
     border-color: var(--color-flat-red);
 }
 
@@ -924,7 +925,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 
 .icon-complexity {
     background: #ddddf3;
-    color: #444471;
+    color: var(--color-purple);
     padding: .75em;
     border-radius: 1em;
     text-align: center;
@@ -938,7 +939,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding-top: 2em;
     padding-bottom: 2em;
     color: #fff;
-    background: #444471;
+    background: var(--color-purple);
 }
 
 .site-head-home {
@@ -1241,10 +1242,6 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     background-color: #fff;
     text-align: center;
     width: 100%;
-}
-
-.featured-page-card {
-    margin: 60px auto;
 }
 
 .content-author-image, .author-card-badge {
@@ -1575,9 +1572,38 @@ section.play-card-content {
     padding: 42px 0;
 }
 
+.page-list {
+    background: var(--color-purple);
+}
+
+.featured-page-card {
+    margin: 10px auto;
+    box-shadow: none!important;
+    background-color: var(--color-bg);
+}
+
+.featured-page-card-img {
+    width: 30%;
+    float: left;
+    margin-right: 1em;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 0px;
+}
+
+.featured-page-card-excerpt {
+    font-size: .75em;
+    line-height: 1.4em;
+    padding-top: 1em;
+    padding: 0.5em 1em 0 1em;
+    text-align: justify;
+    margin-bottom: 0;
+}
+
 .page-list__container, .play-list__container {
     display: grid;
-    grid-template-columns: repeat(9,1fr);
+    grid-template-columns: repeat(4,1fr);
     grid-column-gap: 20px;
 
     margin: auto;
@@ -1590,9 +1616,23 @@ section.play-card-content {
     grid-template-columns: repeat(3,1fr);  
 }
 
+@media (max-width: 1200px){
+    .page-list__container {
+        grid-template-columns: repeat(3,1fr);  
+        width: 100%;
+    }
+}
+
 @media (max-width: 992px){
     .page-list__container {
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(2,1fr);
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px){
+    .page-list__container {
+        grid-template-columns: 1fr;
         width: 90%;
     }
 }
@@ -1782,7 +1822,7 @@ section.play-card-content {
 
 
 .btn:hover {
-    background: #444471;
+    background: var(--color-purple);
     color: #e8f2f7;
     text-decoration: none;
 }
@@ -1821,7 +1861,7 @@ section.play-card-content {
     padding: 20px 0 40px 0;
     color: rgba(255,255,255,0.7);
     font-size: 1.3rem;
-    background: #444471;
+    background: var(--color-purple);
 }
 
 .site-foot-nav {
@@ -2003,4 +2043,47 @@ section.play-card-content {
     font-size: .85em;
     color:var(--color-secondary);
     margin-right: 10px;
+}
+
+.about-us-img {
+    float: right;
+    margin: 0 0 20px 20px;
+    width: 300px;
+    padding: 15px;
+    background: #fdfeff;
+    border-radius: 8px;
+}
+
+.contact-row > .contact-col-2 {
+    width: 48%;
+    float: left;
+}
+.contact-row > .contact-col-2:first-child {
+    margin-right: 2%
+}
+form input, form textarea {
+    border-radius: 4px;
+    border: 1px solid #b0b0dc;
+    background-color: #fdfeff;
+    padding: 7px;
+    width: 100%;
+}
+form label {
+    font-family: var(--font-sans-serif);
+}
+form .btn {
+    background: transparent;
+    margin-left: 0;
+    font-size: 1em;
+}
+
+@media (max-width: 800px) {
+    .about-us-img {
+        display:block;
+        width: 60%;
+        margin: 0 20% 20px;
+    }
+    .contact-row > .contact-col-2 {
+        width: 100%;
+    }
 }
