@@ -77,13 +77,25 @@ const Post = ({ data, location }) => {
                                     })}
                                 </div>
 
+
+
                             </div>   
 
                             {/* The main post content */ }
                             <section
-                                className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: post.html }}
-                            />
+                                className="content-body load-external-scripts">
+
+                                {
+                                    gamesData.map(({ node }) => {
+                                        let gameDataSlug = node.slug;
+                                        let page = relatedFeaturedPages.find(p => p.node.slug === gameDataSlug);
+
+                                        return <GameDataCard data={node} page={page} key={node.bggId} />
+                                    })
+                                }
+
+                                <div className="content-body-text" dangerouslySetInnerHTML={{ __html: post.html }}/>
+                            </section>
 
                         </section>
                     </article>
@@ -100,7 +112,7 @@ const Post = ({ data, location }) => {
                         </footer>
                     }
 
-                    <section>
+                    {/* <section>
                         {
                             gamesData.length !== 0 &&
                         
@@ -122,7 +134,8 @@ const Post = ({ data, location }) => {
                                 })
                             }
                         </section>
-                    </section>
+                    </section> */}
+
                     {
                         relatedPosts.length !== 0 ? 
                             <section>
@@ -135,8 +148,7 @@ const Post = ({ data, location }) => {
                                 </section>
                             </section>
                         : null
-                    }                
-
+                    }
                 </div>
             </Layout>
         </>

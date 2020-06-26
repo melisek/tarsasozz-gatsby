@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Img from 'gatsby-image'
 
-import { Cog, Cogs, HourglassHalf, Child  } from 'styled-icons/fa-solid'
+import { Cog, Cogs, HourglassHalf, Child, Star } from 'styled-icons/fa-solid'
 import { Cogs as IcoCogs } from 'styled-icons/icomoon' 
 import { Group } from 'styled-icons/remix-fill'
 
@@ -19,15 +19,15 @@ const GameDataCard = ({ data, page }) => {
     const complexity = [ "egyszerű", "közepes", "nehéz"];
     
     return (
-        <a href={gameHasPage ? `/${page.node.slug}` : `https://boardgamegeek.com/boardgame/${data.bggId}/`} className="play-card" target={gameHasPage ? null : "_blank"}>
+        <a href={gameHasPage ? `/${page.node.slug}` : `https://boardgamegeek.com/boardgame/${data.bggId}/`} className="play-card game-data-card" target={gameHasPage ? null : "_blank"}>
             <header className="play-card-header">
-                { gameHasPage &&
+                {/* { gameHasPage &&
                     <div className="play-card-image">
                         <Img fluid={page.node.localFeatureImage.childImageSharp.fluid} alt={gameTitle} />
                     </div>
-                }
+                } */}
                 <div className="play-card-head">
-                    <h3 className="play-card-title">{gameTitle}</h3>
+                    <h3 className="game-data-card-title">{gameTitle}</h3>
                 </div>
             </header>
 
@@ -64,6 +64,12 @@ const GameDataCard = ({ data, page }) => {
                             <Child size="1.25em" />
                         </div>
                         <span className="game-data">{data.age}+ év</span>
+                    </div>
+                    <div>
+                        <div className="game-icon icon-age" aria-hidden="true">
+                            <Star size="1.25em" />
+                        </div>
+                        <a href={`https://boardgamegeek.com/boardgame/${data.bggId}/`} target="_blank"><span className="game-data">BGG: {data.bggRating}</span></a>
                     </div>
                 </div>
             </section>

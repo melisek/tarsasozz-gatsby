@@ -549,12 +549,18 @@ h6 {
     display: flex;
     flex-direction: column;
     font-family: var(--font-serif);
+    position: relative;
 }
 
 .post-full-content {
     max-width: 75%;
     margin: 0 auto;
     color: var(--color-base);
+    position: relative;
+}
+
+.content-body-text > p:first-child {
+    width: 70%;
 }
 
 /* .sidebar {
@@ -1377,6 +1383,7 @@ section.play-card-content {
 
 .play-card-content .game-data-grid {
     padding-top: .5em;
+    grid-template-columns: 1fr;
 } 
 
 @media (min-width: 681px)
@@ -1462,6 +1469,19 @@ section.play-card-content {
     -webkit-transform: translate3d(0,-5px,0);
     transform: translate3d(0,-5px,0);
     box-shadow: 0 1px 1px #ccc, 0 4px 4px #ccc;
+}
+
+.game-data-card {
+    width: 28%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 200px;
+}
+
+.game-data-card-title {
+    font-size: 1.5rem;
+    padding-left: .5em;
 }
 
 .site-banner-category:hover {
