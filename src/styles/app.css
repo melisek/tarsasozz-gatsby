@@ -560,7 +560,8 @@ h6 {
 }
 
 .content-body-text > p:first-child {
-    width: 70%;
+    width: 67%;
+    text-align: justify;
 }
 
 /* .sidebar {
@@ -1476,12 +1477,33 @@ section.play-card-content {
     position: absolute;
     top: 0;
     right: 0;
-    height: 200px;
+    padding-bottom: .5em;
 }
 
 .game-data-card-title {
-    font-size: 1.5rem;
-    padding-left: .5em;
+    font-size: 1.5rem!important;
+    padding: 0 .5em;
+    text-align: center;
+}
+
+@media (max-width: 680px) {
+
+    .game-data-card {
+        width: 100%;
+        display: block;
+        position: initial;
+        margin: 1em auto;
+    }
+
+    .content-body-text > p:first-child {
+        width: 100%;
+        text-align: justify;
+    }
+
+    .play-card-content .game-data-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
 }
 
 .site-banner-category:hover {
@@ -1599,7 +1621,7 @@ section.play-card-content {
 .featured-page-card {
     margin: 10px auto;
     box-shadow: none!important;
-    background-color: var(--color-bg);
+    background-color:#525288;
 }
 
 .featured-page-card-img {
@@ -1619,6 +1641,7 @@ section.play-card-content {
     padding: 0.5em 1em 0 1em;
     text-align: justify;
     margin-bottom: 0;
+    color:#cfcfe8;
 }
 
 .page-list__container, .play-list__container {

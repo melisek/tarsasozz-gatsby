@@ -21,10 +21,11 @@ const Post = ({ data, location }) => {
     const post = data.ghostPost;
     const relatedPosts = data.allGhostPost.edges;
     const relatedFeaturedPages = data.allGhostPage.edges;
+    const partnerInfos = data.allGoogleSheetPartnersRow.edges;
     const public_tags = post.tags.filter(t => {
         return t.visibility === "public"
     });
-    const gamesData = data.allInternalGameData.edges;
+    const gamesData = data.allInternalGameCollection.edges.slice(0,1);
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
     const author = post.primary_author;
@@ -76,9 +77,6 @@ const Post = ({ data, location }) => {
                                         ) 
                                     })}
                                 </div>
-
-
-
                             </div>   
 
                             {/* The main post content */ }
@@ -89,8 +87,9 @@ const Post = ({ data, location }) => {
                                     gamesData.map(({ node }) => {
                                         let gameDataSlug = node.slug;
                                         let page = relatedFeaturedPages.find(p => p.node.slug === gameDataSlug);
+                                        let partner = partnerInfos.find(p => p.node.slug === post.slug)
 
-                                        return <GameDataCard data={node} page={page} key={node.bggId} />
+                                        return <GameDataCard data={node} partner={partner?.node} page={page} key={node.gameId} />
                                     })
                                 }
 
@@ -165,7 +164,9 @@ Post.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         allGhostPage: PropTypes.object.isRequired,
-        allInternalGameData: PropTypes.object.isRequired
+        allInternalGameData: PropTypes.object.isRequired,
+        allInternalGameCollection: PropTypes.object.isRequired,
+        allGoogleSheetPartnersRow: PropTypes.object
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -228,6 +229,37 @@ export const postQuery = graphql`
                 age
                 bggRating
                 complexity
+              }
+            }
+        }
+        allInternalGameCollection(filter: {gameId: {in: $bggIds }}) {
+            edges {
+                node {
+                    averageRating
+                    bggRating
+                    gameId
+                    id
+                    image
+                    thumbnail
+                    rating
+                    rank
+                    playingTime
+                    owned
+                    numPlays
+                    isExpansion
+                    maxPlayers
+                    minPlayers
+                    name
+                    yearPublished
+                }
+            }
+        }
+        allGoogleSheetPartnersRow {
+            edges {
+              node {
+                link
+                name
+                slug
               }
             }
         }
