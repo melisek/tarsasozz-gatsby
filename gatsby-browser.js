@@ -9,6 +9,13 @@
  * via ids/classnames etc.
  *
  */
+
+const addScript = url => {
+    const script = document.createElement("script")
+    script.src = url
+    document.body.appendChild(script)
+}
+
 var trustAllScripts = function () {
     var scriptNodes = document.querySelectorAll('.load-external-scripts script');
 
@@ -26,6 +33,10 @@ var trustAllScripts = function () {
         document.getElementsByTagName('head')[0].appendChild(s);
     }
 };
+
+exports.onInitialClientRender = function () {
+    addScript("https://cdn.jsdelivr.net/npm/medium-zoom@1.0.5/dist/medium-zoom.min.js");
+}
 
 exports.onRouteUpdate = function () {
     trustAllScripts();

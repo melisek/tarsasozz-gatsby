@@ -167,7 +167,6 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             </div>
                         </div>
                     </footer>
-
                 </div>
             </div>
 
