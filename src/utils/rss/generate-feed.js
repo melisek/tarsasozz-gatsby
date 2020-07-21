@@ -3,7 +3,7 @@ const tagsHelper = require(`@tryghost/helpers`).tags
 const _ = require(`lodash`)
 
 const generateItem = function generateItem(post, siteConfig) {
-    const itemUrl = `${siteConfig}/${post.slug}`
+    const itemUrl = `${siteConfig.siteUrl}/${post.slug}`
     const html = post.html
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     const item = {
