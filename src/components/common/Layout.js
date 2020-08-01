@@ -9,7 +9,7 @@ import theme from '../../utils/theme'
 import Search from '../search'
 import { Instagram, Facebook } from 'styled-icons/fa-brands'
 
-import { Navigation } from '.'
+import { Navigation, HamburgerNav } from '.'
 
 import CookieConsent from 'react-cookie-consent'
 
@@ -59,9 +59,9 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         </div>
             </CookieConsent>
 
-            <div className="viewport">
-
-                <div className="viewport-top">
+            <div className="viewport" id="viewport">
+                <HamburgerNav data={site.navigation} fbUrl={facebookUrl} instaUrl={instagramUrl} />
+                <div className="viewport-top" id="viewport-top">
                     {/* The main header section on top of the screen  ${site.cover_image} */}
                     <header className={isHome ? `site-head site-head-home` : `site-head`} style={isHome? { ...site.cover_image && {} } : {} }>
                         <div className="container">

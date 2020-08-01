@@ -1171,7 +1171,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1023px) {
     .site-nav {
         display:none!important;
     }
@@ -2134,4 +2134,8 @@ form .btn {
     .contact-row > .contact-col-2 {
         width: 100%;
     }
+}
+
+.menu-item > a {
+    color: var(--color-purple);
 }
