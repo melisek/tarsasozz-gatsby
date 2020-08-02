@@ -7,8 +7,8 @@ import { Instagram, Facebook } from 'styled-icons/fa-brands'
 var styles = {
     bmBurgerButton: {
       position: 'fixed',
-      width: '36px',
-      height: '30px',
+      width: '26px',
+      height: '20px',
       left: '36px',
       top: '36px'
     },
