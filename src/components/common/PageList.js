@@ -13,17 +13,37 @@ const PageList = ({ data }) => {
         <>
             <section className="page-list">
                 <h2 className="home-title" style={{color: 'var(--color-bg)' }}>Polcunk</h2>
-                <div className="page-list__container">
-
+                <section className="card-list">
                     {featuredPages.map(({ node, i }) => (
-                        <a href={node.slug} title={node.title} key={i} className="featured-page-card">
-                            <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} className="featured-page-card-img" />
-                            <p className="featured-page-card-excerpt">{node.excerpt}</p>
-                        </a>
-                    ))}
+                        
+                        <article className="card" key={i}>
+                            <header className="card-header">
+                                <a href={node.slug} title={node.title}>
+                                    <h2>{node.title}</h2>
+                                </a>
+                            </header>
 
-                </div>
+                            <div className="card-pre-content">
+                                <div className="card-img">
+                                    <a href={node.slug} title={node.title}>
+                                        <Img fluid={node.localFeatureImage.childImageSharp.fluid} alt={node.title} className="featured-page-card-img" />
+                                    </a>
+                                </div>
+                                
+                                <div className="tags">
+                                    {node.tags.filter(t => !t.slug.startsWith('hash-')).map((tag) => (
+                                        <a className="game-category" id={tag.slug} key={tag.slug} href={`/tag/${tag.slug}/`}>{tag.name}</a>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <p className="featured-page-card-excerpt">{node.excerpt}</p>
+
+                        </article>
+                    ))}
+                </section>
             </section>
+
         </>
     )
 }

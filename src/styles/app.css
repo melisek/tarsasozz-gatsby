@@ -1625,20 +1625,15 @@ section.play-card-content {
 }
 
 .featured-page-card-img {
-    width: 30%;
-    float: left;
-    margin-right: 1em;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 0px;
+    width: 100%;
+    border-radius: 8px;
 }
 
 .featured-page-card-excerpt {
     font-size: .75em;
     line-height: 1.4em;
     padding-top: 1em;
-    padding: 0.5em 1em 0 1em;
+    padding-right: 1em;
     text-align: justify;
     margin-bottom: 0;
     color:#cfcfe8;
@@ -2138,4 +2133,81 @@ form .btn {
 
 .menu-item > a {
     color: var(--color-purple);
+}
+
+.card-list {
+    display: flex;
+    padding: 3rem;
+    overflow-x: scroll;
+}
+
+.card-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.card-list::-webkit-scrollbar-thumb {
+    background: var(--color-light-turquoise);
+    border-radius: 8px;
+}
+
+.card-list::-webkit-scrollbar-track {
+    background-color: var(--color-dark-turquoise);
+}
+
+.card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 350px;
+    width: 400px;
+    min-width: 250px;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--color-purple);
+    box-shadow: -1rem 0 3rem #1f1f29;
+
+    transition: .2s;
+}
+
+.card h2 {
+    color:var(--color-bg);
+    text-align: left;
+    font-size: 1.8rem;
+}
+
+.card:hover {
+    transform: translateY(-1rem);
+    background-color: #525282;
+}
+
+.card:hover~.card {
+    transform: translateX(130px);
+}
+
+.card:not(:first-child) {
+    margin-left: -130px;
+}
+
+.card .game-category {
+    border: 2px solid var(--color-base);
+    border-radius: 8px;
+    font-family: var(--font-sans-serif);
+    font-size: .75em;
+    margin: 0 .25em 0.25em;
+    color: var(--color-base);
+    display: inline-block;
+}
+
+.card a:hover {
+    text-decoration: none;
+}
+
+.card .tags {
+    text-align: left;
+}
+
+.card-pre-content {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-column-gap: .5em;
 }
