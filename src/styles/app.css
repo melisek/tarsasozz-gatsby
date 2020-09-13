@@ -809,6 +809,18 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding-right: 10px;
 }
 
+.content-tags > a {
+    margin-right: .5em;
+}
+
+.content-tags .game-category {
+    padding: .25em;
+    border-radius: 8px;
+    font-family: var(--font-sans-serif);
+    text-transform: lowercase;
+    font-size: .85em;
+}
+
 .content-body h1,
 .content-body h2,
 .content-body h3,
@@ -1830,7 +1842,7 @@ section.play-card-content {
 }
 
 .author-header-item:first-child {
-    padding-left: 0;
+    margin-left: 0;
 }
 
 @media (max-width: 500px) {

@@ -8,7 +8,6 @@ import { MetaData } from '../components/common/meta'
 import AuthorCard from '../components/common/AuthorCard'
 import PostCard from '../components/common/PostCard'
 import GameDataCard from '../components/common/GameDataCard'
-import { Tags } from '@tryghost/helpers-gatsby'
 import Img from 'gatsby-image'
 
 /**
@@ -25,6 +24,8 @@ const Post = ({ data, location }) => {
     const public_tags = post.tags.filter(t => {
         return t.visibility === "public"
     });
+    const gameCategoryTags = post.tags.filter(t => !t.slug.startsWith('hash-') && t.visibility !== "public");
+
     const gamesData = data.allInternalGameCollection.edges.slice(0,1);
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
@@ -77,13 +78,15 @@ const Post = ({ data, location }) => {
                                 </div>
 
                                 <div className="content-tags">
-                                    {public_tags.map((tag, i) => {     
-                                        return (
+                                    {public_tags.map((tag, i) => ( 
                                             <a href={`/tag/${tag.slug}`} title={tag.meta_title} key={i}>
-                                                {tag.name} &nbsp; 
+                                                {tag.name}
                                             </a>
-                                        ) 
-                                    })}
+                                    ))}
+
+                                    {gameCategoryTags.map((tag) => (
+                                        <a className="game-category" id={tag.slug} key={tag.slug} href={`/tag/${tag.slug}/`}>{tag.name}</a>
+                                    ))}
                                 </div>
                             </div>   
 
