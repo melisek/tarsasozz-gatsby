@@ -25,6 +25,7 @@ const Post = ({ data, location }) => {
         return t.visibility === "public"
     });
     const gameCategoryTags = post.tags.filter(t => !t.slug.startsWith('hash-') && t.visibility !== "public");
+    const withoutGameData = post.tags.find(t => t.slug === 'hash-s-without-game-data');
 
     const gamesData = data.allInternalGameCollection.edges.slice(0,1);
 
@@ -95,6 +96,7 @@ const Post = ({ data, location }) => {
                                 className="content-body load-external-scripts">
 
                                 {
+                                    withoutGameData === undefined &&
                                     gamesData.map(({ node }) => {
                                         let gameDataSlug = node.slug;
                                         let page = relatedFeaturedPages.find(p => p.node.slug === gameDataSlug);
@@ -104,16 +106,16 @@ const Post = ({ data, location }) => {
                                     })
                                 }
 
-                                <div className="content-body-text" dangerouslySetInnerHTML={{ __html: post.html }}/>
+                                <div className={ withoutGameData === undefined ? 'content-body-text has-game-data' : `content-body-text`} dangerouslySetInnerHTML={{ __html: post.html }}/>
                             </section>
 
                         </section>
                     </article>
 
                     {
-                        gamesData.length !== 0 &&
-                    
-                        <footer className="post-footer">
+                        withoutGameData === undefined &&
+                        //  card-list author-list
+                        <footer className="post-footer"> 
                             {
                                 post.authors.map((author, i) => (
                                     <AuthorCard author={author} key={i} />

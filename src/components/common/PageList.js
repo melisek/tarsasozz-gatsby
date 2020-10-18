@@ -14,9 +14,9 @@ const PageList = ({ data }) => {
             <section className="page-list">
                 <h2 className="home-title" style={{color: 'var(--color-bg)' }}>Polcunk</h2>
                 <section className="card-list">
-                    {featuredPages.map(({ node, i }) => (
+                    {featuredPages.map(({ node }) => (
                         
-                        <article className="card" key={i}>
+                        <article className="card" key={node.slug}>
                             <header className="card-header">
                                 <a href={node.slug} title={node.title}>
                                     <h2>{node.title}</h2>
@@ -31,8 +31,8 @@ const PageList = ({ data }) => {
                                 </div>
                                 
                                 <div className="tags">
-                                    {node.tags.filter(t => !t.slug.startsWith('hash-')).map((tag) => (
-                                        <a className="game-category" id={tag.slug} key={tag.slug} href={`/tag/${tag.slug}/`}>{tag.name}</a>
+                                    {node.tags.filter(t => !t.slug.startsWith('hash-')).map((tag, i) => (
+                                        <a className="game-category" id={tag.slug} key={i} href={`/tag/${tag.slug}/`}>{tag.name}</a>
                                     ))}
                                 </div>
                             </div>

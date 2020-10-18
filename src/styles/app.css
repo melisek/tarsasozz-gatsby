@@ -559,7 +559,7 @@ h6 {
     position: relative;
 }
 
-.content-body-text > p:first-child {
+.content-body-text.has-game-data > p:first-child {
     width: 67%;
     text-align: justify;
 }
@@ -1507,7 +1507,7 @@ section.play-card-content {
         margin: 1em auto;
     }
 
-    .content-body-text > p:first-child {
+    .content-body-text.has-game-data > p:first-child {
         width: 100%;
         text-align: justify;
     }
