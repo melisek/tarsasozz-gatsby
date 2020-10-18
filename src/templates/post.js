@@ -43,7 +43,7 @@ const Post = ({ data, location }) => {
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
                 <script type="text/javascript">
                     {`var zoomConfig = {background: '#efeffd'};
-                    mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig)
+                    mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig);
                     `}
                 </script>
                 
@@ -210,7 +210,7 @@ export const postQuery = graphql`
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
             limit: 3,
-            filter: { slug: { ne: $slug }, tags: {elemMatch: {slug: {in: $tags} } }}
+            filter: { slug: { ne: $slug }, tags: {elemMatch: {slug: {in: $tags } }}}
         ) {
           edges {
             node {

@@ -164,6 +164,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
 
     const bggIdTagPrefix = 'hash-bgg-';
+    const systemTagPrefix = 'hash-s-';
 
     // Create pages
     pages.forEach(({ node }) => {
@@ -208,7 +209,7 @@ exports.createPages = async ({ graphql, actions }) => {
         node.url = `/${node.slug}/`
 
         const internalPostTags = node.tags.filter(tag => tag.visibility === "internal");
-        const postTagSlugs = Array.from(internalPostTags, tag => tag.slug);
+        const postTagSlugs = Array.from(internalPostTags, tag => tag.slug).filter(s => !s.startsWith(systemTagPrefix));
 
         const bggIdTags = postTagSlugs.filter(slug => slug.startsWith(bggIdTagPrefix));
         let bggIds = new Array();
