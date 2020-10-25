@@ -71,7 +71,7 @@ const GameDataCard = ({ data, partner, page }) => {
                                 <div className="game-icon icon-age" aria-hidden="true">
                                     <HomeHeart size="1.25em" />
                                 </div>
-                                <span className="game-data"><a href={partner.link} target="_blank">{partner.name}</a></span>
+                                <span className="game-data"><a href={partner.link} target="_blank" rel="nofollow">{partner.name}</a></span>
                             </div>
                     }
 
