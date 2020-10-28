@@ -18,19 +18,60 @@ import Img from 'gatsby-image'
 */
 const Post = ({ data, location }) => {
     const post = data.ghostPost;
-    const relatedPosts = data.allGhostPost.edges;
     const relatedFeaturedPages = data.allGhostPage.edges;
     const partnerInfos = data.allGoogleSheetPartnersRow.edges;
-    const public_tags = post.tags.filter(t => {
-        return t.visibility === "public"
-    });
-    const gameCategoryTags = post.tags.filter(t => !t.slug.startsWith('hash-') && t.visibility !== "public");
+    const public_tags = post.tags.filter(t => t.visibility === "public");
+    const internalTags = post.tags.filter(t => t.visibility === "internal");
+    const gameCategoryTags = internalTags.filter(t => !t.slug.startsWith('hash-'));
     const withoutGameData = post.tags.find(t => t.slug === 'hash-s-without-game-data');
 
     const gamesData = data.allInternalGameCollection.edges.slice(0,1);
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
     const author = post.primary_author;
+
+    const gameTags = internalTags.filter(t => t.slug.startsWith('hash-bgg-'));
+    const bestTagMatchKey = internalTags.length + 1;
+    const relatedPostsGrouped = data.allGhostPost.edges.reduce(function (res, p) {
+        let commonGameTags = p.node.tags.filter(t => t.visibility === "internal" && gameTags.find(gt => gt.slug === t.slug));
+        let key = '';
+        if (commonGameTags.length === 0)
+        {
+            let commonTags = p.node.tags.filter(t => t.visibility === "internal" && internalTags.find(it => it.slug === t.slug));
+            key = commonTags.length;
+        }
+        else {
+            key = bestTagMatchKey;
+        }
+
+        if (!res[key]) {
+            res[key] = [];
+        }
+        res[key].push(p);
+        return res;
+    }, {});
+
+    const relatedPostMaxCount = 3;
+    let relatedPosts = [];
+    let relatedPostCount = 0;
+    
+    if (relatedPostsGrouped[bestTagMatchKey]) {
+        relatedPostsGrouped[bestTagMatchKey].forEach(p => {
+            relatedPosts.push(p)
+        });
+        relatedPostCount = relatedPostsGrouped[bestTagMatchKey].length;
+    }
+
+    let groupIdx = internalTags.length;
+    while (relatedPostCount < relatedPostMaxCount){
+        if (relatedPostsGrouped[groupIdx]) {
+            for (let i = 0; relatedPostCount < relatedPostMaxCount && i < relatedPostsGrouped[groupIdx].length; i++) {
+                relatedPosts.push(relatedPostsGrouped[groupIdx][i]);
+                relatedPostCount++;
+            }
+        }
+        groupIdx--;
+    }
 
     return (
         <>
@@ -209,12 +250,12 @@ export const postQuery = graphql`
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
-            limit: 3,
+            limit: 100,
             filter: { slug: { ne: $slug }, tags: {elemMatch: {slug: {in: $tags } }}}
         ) {
           edges {
             node {
-                ...GhostPostFields
+                ...GhostPostCoreFields
                 ...GatsbyImageSharpSinglePost
             }
           }

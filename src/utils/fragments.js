@@ -131,6 +131,53 @@ export const ghostPostFields = graphql`
     }
 `
 
+// Used for single posts
+export const ghostPostCoreFields = graphql`
+    fragment GhostPostCoreFields on GhostPost {
+        # Main fields
+        id
+        title
+        slug
+        featured
+        feature_image
+        visibility
+        excerpt
+
+        # Dates formatted
+        created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
+        published_at_pretty: published_at(formatString: "DD MMMM, YYYY")
+        updated_at_pretty: updated_at(formatString: "DD MMMM, YYYY")
+
+        # Dates unformatted
+        created_at
+        published_at
+        updated_at
+
+        primary_author {
+            name
+            slug
+            bio
+            # email
+            profile_image
+            twitter
+            facebook
+            website
+        }
+
+        # Tags
+        primary_tag {
+            name
+            slug
+            visibility
+        }
+        tags {
+            name
+            slug
+            visibility
+        }
+    }
+`
+
 // Used for post featured images on post cards
 export const gatsbyImageSharpPostCard = graphql`
     fragment GatsbyImageSharpPostCard on GhostPost {
