@@ -169,22 +169,7 @@ module.exports = {
             },
         },
         `gatsby-plugin-styled-components`,
-        {
-            resolve: `gatsby-plugin-prefetch-google-fonts`,
-            options: {
-                fonts: [
-                    {
-                        family: `Poppins`,
-                        variants: [`700`],
-                        subsets: [`latin-ext`]
-                    },
-                    {
-                        family: `Noto Serif`,
-                        subsets: [`latin-ext`]
-                    }
-                ],
-            },
-        },
+        `gatsby-plugin-preload-fonts`,
         `gatsby-plugin-netlify`,
         /**
          *  Utility Plugins
