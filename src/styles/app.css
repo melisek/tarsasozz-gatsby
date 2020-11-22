@@ -1699,33 +1699,19 @@ section.play-card-content {
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
         ". gameinfo gameinfo"
-        "post gallery gallery"
-        "post gallery gallery";
+        "post post post"
+        "gallery gallery .";
 }
 
-@media (max-width: 680px) {
-    .featured-page-grid {
-        grid-gap: 0px;
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "."
-            "gameinfo"
-            "post"
-            "gallery";
-    }
 
-    .game-data-wrapper {
-        margin-top: 1em;
-    }
-}
 
 .featured-page-grid .col-post {
     grid-area: post;
 }
 
 .featured-page-grid .col-post .post-feed {
-    grid-template-columns: 1fr;
-    grid-template-areas: ".";
+    grid-template-columns: repeat(3,1fr);
+    grid-template-areas: ". . .";
 }
 
 .featured-page-grid .col-gameinfo {
@@ -1734,7 +1720,6 @@ section.play-card-content {
 
 .featured-page-grid .col-gallery {
     grid-area: gallery;
-    padding-left: 7.5%;
 }
 
 .featured-page-grid .col-gallery .gallery-container {
@@ -1753,6 +1738,27 @@ section.play-card-content {
 
 .mostplayed-list {
     padding-bottom: 60px;
+}
+
+@media (max-width: 680px) {
+    .featured-page-grid {
+        grid-gap: 0px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "."
+            "gameinfo"
+            "post"
+            "gallery";
+    }
+
+    .game-data-wrapper {
+        margin-top: 1em;
+    }
+
+    .featured-page-grid .col-post .post-feed {
+        grid-template-columns: 1fr;
+        grid-template-areas: ".";
+    }
 }
 
 /* Tag Archives
