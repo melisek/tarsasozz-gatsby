@@ -210,7 +210,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
         const internalPostTags = node.tags.filter(tag => tag.visibility === "internal");
         const postTagSlugs = Array.from(internalPostTags, tag => tag.slug).filter(s => !s.startsWith(systemTagPrefix));
-
+        
         const bggIdTags = postTagSlugs.filter(slug => slug.startsWith(bggIdTagPrefix));
         let bggIds = new Array();
         if (bggIdTags !== null && bggIdTags !== undefined && bggIdTags.length > 0) {
@@ -235,6 +235,8 @@ exports.createPages = async ({ graphql, actions }) => {
         })
     })
 
+    const homePageTags = ["tarsasjatek-ajanlo","tarsasjatek-kritika","tarsasjatek-kiegeszitok","interju"];
+
     // Create pagination
     paginate({
         createPage,
@@ -248,6 +250,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 return `/page`
             }
         },
+        context: {
+            homePageTags: homePageTags
+        }
     })
 }
 

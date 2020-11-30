@@ -664,9 +664,32 @@ h6 {
     border-color: var(--color-flat-red);
 }
 
+.game-list.game-data-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    font-size: .7em;
+}
+
+.game-list.game-data-grid .game-icon {
+    width: 35px;
+    height: 35px;
+} 
+
+.game-list.game-data-grid .icon-complexity {
+    padding: 0;
+}
+
+.icon-rating {
+
+}
 
 
 @media (max-width: 800px) {
+    .game-list.game-data-grid {
+        grid-template-columns: repeat(2,1fr);
+        row-gap: 1em;
+    }
+
     .post-full-content {
         max-width: 92%;
         margin: 0 4%;
@@ -952,6 +975,12 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     padding: .75em;
     border-radius: 1em;
     text-align: center;
+}
+
+.icon-rating {
+    background: #ddddf3 url(http://localhost:8000/images/star-solid.svg) no-repeat center center;
+    background-size: 1.5em;
+    border-radius: 1em;
 }
 
 

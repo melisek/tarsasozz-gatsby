@@ -63,10 +63,10 @@ export default Index
 // This page query loads all posts sorted descending by published date
 // The `limit` and `skip` values are used for pagination
 export const pageQuery = graphql`
-  query GhostPostQuery($limit: Int!, $skip: Int!) {
+  query GhostPostQuery($limit: Int!, $skip: Int!, $homePageTags: [String]) {
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
-        filter: { featured: {eq: false} },
+        filter: { featured: {eq: false}, tags: {elemMatch: {slug: { in: $homePageTags }}}},
         limit: $limit,
         skip: $skip
     ) {
