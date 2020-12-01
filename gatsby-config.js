@@ -165,7 +165,7 @@ module.exports = {
               apiKey: process.env.ALGOLIA_API_KEY,
               indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME, // for all queries
               queries,
-              chunkSize: 10000, // default: 1000
+              chunkSize: 1000, // default: 1000
             },
         },
         `gatsby-plugin-styled-components`,
