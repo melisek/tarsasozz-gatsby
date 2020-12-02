@@ -24,7 +24,7 @@ const Page = ({ data, location }) => {
     const featuredImage = data.ghostPage.localFeatureImage ? data.ghostPage.localFeatureImage.childImageSharp.fluid : null;
 
     // const plays = data.allInternalPlays.edges
-    const games = data.allInternalGameData.edges
+    //const games = data.allInternalGameData.edges
 
     const complexity = [ "Könnyű", "Normál", "Nehéz"];
 
@@ -46,7 +46,7 @@ const Page = ({ data, location }) => {
                                 <Img fluid={featuredImage} alt={page.title} />
                             </figure> 
 
-                            <article className="content col-gameinfo">
+                            {/* <article className="content col-gameinfo">
                                 <div className="featured-page-full-content">
                                     {games.map(({ node, index }) => (
                                         <div key={index} className="game-data-wrapper">
@@ -90,7 +90,7 @@ const Page = ({ data, location }) => {
                                     ))}
 
                                 </div> 
-                            </article>
+                            </article> */}
                             {
                                 relatedPosts.length !== 0 ? 
 
@@ -162,7 +162,7 @@ Page.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         //allInternalPlays: PropTypes.object.isRequired,
-        allInternalGameData: PropTypes.object.isRequired,
+        //allInternalGameData: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -187,7 +187,7 @@ Page.propTypes = {
 export default Page
 
 export const postQuery = graphql`
-    query($slug: String!, $bggIdTag: String, $bggId: Int) {
+    query($slug: String!, $bggIdTag: String) {
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
             ...GatsbyImageSharpSinglePage
@@ -205,21 +205,5 @@ export const postQuery = graphql`
           }
         }
         
-        allInternalGameData(filter: {bggId: {eq: $bggId }}) {
-            edges {
-              node {
-                bggId
-                slug
-                title
-                minPlayers
-                maxPlayers
-                minTime
-                maxTime
-                age
-                bggRating
-                complexity
-              }
-            }
-        }
     }
 `

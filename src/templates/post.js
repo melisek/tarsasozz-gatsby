@@ -19,13 +19,13 @@ import Img from 'gatsby-image'
 const Post = ({ data, location }) => {
     const post = data.ghostPost;
     const relatedFeaturedPages = data.allGhostPage.edges;
-    const partnerInfos = data.allGoogleSheetPartnersRow.edges;
+    // const partnerInfos = data.allGoogleSheetPartnersRow.edges;
     const public_tags = post.tags.filter(t => t.visibility === "public");
     const internalTags = post.tags.filter(t => t.visibility === "internal");
     const gameCategoryTags = internalTags.filter(t => !t.slug.startsWith('hash-'));
-    const withoutGameData = post.tags.find(t => t.slug === 'hash-s-without-game-data');
+    const withoutGameData = true;
 
-    const gamesData = data.allInternalGameCollection.edges.slice(0,1);
+    // const gamesData = data.allInternalGameCollection.edges.slice(0,1);
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
     const author = post.primary_author;
@@ -82,11 +82,11 @@ const Post = ({ data, location }) => {
             />
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
-                <script type="text/javascript">
+                {/* <script type="text/javascript">
                     {`var zoomConfig = {background: '#efeffd'};
                     mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig);
                     `}
-                </script>
+                </script> */}
                 
             </Helmet>
 
@@ -119,7 +119,7 @@ const Post = ({ data, location }) => {
                                     }).format(new Date(post.published_at))}
                                 </div>
 
-                                <div className="content-tags">
+                                {/* <div className="content-tags">
                                     {public_tags.map((tag, i) => ( 
                                             <a href={`/tag/${tag.slug}`} title={tag.meta_title} key={i}>
                                                 {tag.name}
@@ -129,14 +129,14 @@ const Post = ({ data, location }) => {
                                     {gameCategoryTags.map((tag) => (
                                         <a className="game-category" id={tag.slug} key={tag.slug} href={`/tag/${tag.slug}/`}>{tag.name}</a>
                                     ))}
-                                </div>
+                                </div> */}
                             </div>   
 
                             {/* The main post content */ }
                             <section
                                 className="content-body load-external-scripts">
 
-                                {
+                                {/* {
                                     withoutGameData === undefined &&
                                     gamesData.map(({ node }) => {
                                         let gameDataSlug = node.slug;
@@ -145,7 +145,7 @@ const Post = ({ data, location }) => {
 
                                         return <GameDataCard data={node} partner={partner?.node} page={page} key={node.gameId} />
                                     })
-                                }
+                                } */}
 
                                 <div className={ withoutGameData === undefined ? 'content-body-text has-game-data' : `content-body-text`} dangerouslySetInnerHTML={{ __html: post.html }}/>
                             </section>
@@ -219,9 +219,9 @@ Post.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         allGhostPage: PropTypes.object.isRequired,
-        allInternalGameData: PropTypes.object.isRequired,
-        allInternalGameCollection: PropTypes.object.isRequired,
-        allGoogleSheetPartnersRow: PropTypes.object
+        //allInternalGameData: PropTypes.object.isRequired,
+        //allInternalGameCollection: PropTypes.object.isRequired,
+        //allGoogleSheetPartnersRow: PropTypes.object
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -229,7 +229,7 @@ Post.propTypes = {
 export default Post
 
 export const postQuery = graphql`
-    query($slug: String!, $tags: [String!], $bggIdTags: [String], $bggIds: [Int]) {
+    query($slug: String!, $tags: [String!], $bggIdTags: [String]) {
         ghostPost(slug: { eq: $slug }) {
             ...GhostPostFields
             localFeatureImage {
@@ -269,53 +269,6 @@ export const postQuery = graphql`
                     ...GhostPageFields
                     ...GatsbyImageSharpSinglePage
                 }
-            }
-        }
-        allInternalGameData(filter: {bggId: {in: $bggIds }}) {
-            edges {
-              node {
-                bggId
-                slug
-                title
-                minPlayers
-                maxPlayers
-                minTime
-                maxTime
-                age
-                bggRating
-                complexity
-              }
-            }
-        }
-        allInternalGameCollection(filter: {gameId: {in: $bggIds }}) {
-            edges {
-                node {
-                    averageRating
-                    bggRating
-                    gameId
-                    id
-                    image
-                    thumbnail
-                    rating
-                    rank
-                    playingTime
-                    owned
-                    numPlays
-                    isExpansion
-                    maxPlayers
-                    minPlayers
-                    name
-                    yearPublished
-                }
-            }
-        }
-        allGoogleSheetPartnersRow {
-            edges {
-              node {
-                link
-                name
-                slug
-              }
             }
         }
     }
