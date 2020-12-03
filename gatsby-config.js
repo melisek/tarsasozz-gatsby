@@ -86,30 +86,30 @@ module.exports = {
                 quality: 75
             },
         },
-        // {
-        //     resolve: `gatsby-source-apiserver`,
-        //     options: {
-        //             typePrefix: "internal__",
-        //             method: "get",
-        //             headers: {
-        //                 "Content-Type": "application/json"
-        //             },
-        //             entitiesArray: [
-        //                 {  
-        //                     url: `${process.env.BGG_API_URL}mostplayed/${process.env.BGG_API_USERNAME}/`,
-        //                     name: `mostPlayedGames`
-        //                 },
-        //                 {
-        //                     url: `https://tarsasozz-wizard.azurewebsites.net/wizard/list`,
-        //                     name: `gameData`
-        //                 },
-        //                 {  
-        //                     url: `${process.env.BGG_API_URL}collection/${process.env.BGG_API_USERNAME}/`,
-        //                     name: `gameCollection`
-        //                 }
-        //             ]
-        //     }
-        // },
+        {
+            resolve: `gatsby-source-apiserver`,
+            options: {
+                    typePrefix: "internal__",
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    entitiesArray: [
+                        {  
+                            url: `${process.env.BGG_API_URL}mostplayed/${process.env.BGG_API_USERNAME}/`,
+                            name: `mostPlayedGames`
+                        },
+                        {
+                            url: `https://tarsasozz-wizard.azurewebsites.net/wizard/list`,
+                            name: `gameData`
+                        },
+                        {  
+                            url: `${process.env.BGG_API_URL}collection/${process.env.BGG_API_USERNAME}/`,
+                            name: `gameCollection`
+                        }
+                    ]
+            }
+        },
         
         // {
         //     resolve: "gatsby-source-apiserver",
@@ -165,7 +165,7 @@ module.exports = {
               apiKey: process.env.ALGOLIA_API_KEY,
               indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME, // for all queries
               queries,
-              chunkSize: 1000, // default: 1000
+              chunkSize: 10000, // default: 1000
             },
         },
         `gatsby-plugin-styled-components`,

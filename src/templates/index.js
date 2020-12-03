@@ -38,10 +38,10 @@ const Index = ({ data, location, pageContext }) => {
                     </section>
                     <Pagination pageContext={pageContext} />
                 </div>
-{/* 
+
                 <PageList />
 
-                <MostPlayedList /> */}
+                <MostPlayedList />
             </Layout>
         </>
     )

@@ -26,7 +26,7 @@
   "scripts": {
     "preload-fonts": "gatsby-preload-fonts",
     "serve": "gatsby build && NODE_ENV=production gatsby serve",
-    "build": "NODE_OPTIONS=--max-old-space-size=8192 && gatsby build",
+    "build": "gatsby build",
     "dev": "gatsby develop",
     "lint": "eslint . --ext .js --cache",
     "test": "echo \"Error: no test specified\" && exit 1"

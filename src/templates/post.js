@@ -19,59 +19,62 @@ import Img from 'gatsby-image'
 const Post = ({ data, location }) => {
     const post = data.ghostPost;
     const relatedFeaturedPages = data.allGhostPage.edges;
-    // const partnerInfos = data.allGoogleSheetPartnersRow.edges;
+    const partnerInfos = data.allGoogleSheetPartnersRow.edges;
     const public_tags = post.tags.filter(t => t.visibility === "public");
     const internalTags = post.tags.filter(t => t.visibility === "internal");
     const gameCategoryTags = internalTags.filter(t => !t.slug.startsWith('hash-'));
-    const withoutGameData = true;
+    const withoutGameData = post.tags.find(t => t.slug === 'hash-s-without-game-data');
 
-    // const gamesData = data.allInternalGameCollection.edges.slice(0,1);
+    const gamesData = data.allInternalGameCollection.edges.slice(0,1);
 
     const featuredImage = data.ghostPost.localFeatureImage.childImageSharp.fluid;
     const author = post.primary_author;
 
-    const gameTags = internalTags.filter(t => t.slug.startsWith('hash-bgg-'));
-    const bestTagMatchKey = internalTags.length + 1;
-    const relatedPostsGrouped = data.allGhostPost.edges.reduce(function (res, p) {
-        let commonGameTags = p.node.tags.filter(t => t.visibility === "internal" && gameTags.find(gt => gt.slug === t.slug));
-        let key = '';
-        if (commonGameTags.length === 0)
-        {
-            let commonTags = p.node.tags.filter(t => t.visibility === "internal" && internalTags.find(it => it.slug === t.slug));
-            key = commonTags.length;
-        }
-        else {
-            key = bestTagMatchKey;
-        }
+    // TODO
+    const relatedPosts = data.allGhostPost.edges;
 
-        if (!res[key]) {
-            res[key] = [];
-        }
-        res[key].push(p);
-        return res;
-    }, {});
+    // const gameTags = internalTags.filter(t => t.slug.startsWith('hash-bgg-'));
+    // const bestTagMatchKey = internalTags.length + 1;
+    // const relatedPostsGrouped = data.allGhostPost.edges.reduce(function (res, p) {
+    //     let commonGameTags = p.node.tags.filter(t => t.visibility === "internal" && gameTags.find(gt => gt.slug === t.slug));
+    //     let key = '';
+    //     if (commonGameTags.length === 0)
+    //     {
+    //         let commonTags = p.node.tags.filter(t => t.visibility === "internal" && internalTags.find(it => it.slug === t.slug));
+    //         key = commonTags.length;
+    //     }
+    //     else {
+    //         key = bestTagMatchKey;
+    //     }
 
-    const relatedPostMaxCount = 3;
-    let relatedPosts = [];
-    let relatedPostCount = 0;
+    //     if (!res[key]) {
+    //         res[key] = [];
+    //     }
+    //     res[key].push(p);
+    //     return res;
+    // }, {});
+
+    // const relatedPostMaxCount = 3;
+    // let relatedPosts = [];
+    // let relatedPostCount = 0;
     
-    if (relatedPostsGrouped[bestTagMatchKey]) {
-        relatedPostsGrouped[bestTagMatchKey].forEach(p => {
-            relatedPosts.push(p)
-        });
-        relatedPostCount = relatedPostsGrouped[bestTagMatchKey].length;
-    }
+    // if (relatedPostsGrouped[bestTagMatchKey]) {
+    //     relatedPostsGrouped[bestTagMatchKey].forEach(p => {
+    //         relatedPosts.push(p)
+    //     });
+    //     relatedPostCount = relatedPostsGrouped[bestTagMatchKey].length;
+    // }
 
-    let groupIdx = internalTags.length;
-    while (relatedPostCount < relatedPostMaxCount){
-        if (relatedPostsGrouped[groupIdx]) {
-            for (let i = 0; relatedPostCount < relatedPostMaxCount && i < relatedPostsGrouped[groupIdx].length; i++) {
-                relatedPosts.push(relatedPostsGrouped[groupIdx][i]);
-                relatedPostCount++;
-            }
-        }
-        groupIdx--;
-    }
+    // let groupIdx = internalTags.length;
+    // while (relatedPostCount < relatedPostMaxCount){
+    //     if (relatedPostsGrouped[groupIdx]) {
+    //         for (let i = 0; relatedPostCount < relatedPostMaxCount && i < relatedPostsGrouped[groupIdx].length; i++) {
+    //             relatedPosts.push(relatedPostsGrouped[groupIdx][i]);
+    //             relatedPostCount++;
+    //         }
+    //     }
+    //     groupIdx--;
+    // }
 
     return (
         <>
@@ -82,11 +85,11 @@ const Post = ({ data, location }) => {
             />
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
-                {/* <script type="text/javascript">
+                <script type="text/javascript">
                     {`var zoomConfig = {background: '#efeffd'};
                     mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig);
                     `}
-                </script> */}
+                </script>
                 
             </Helmet>
 
@@ -119,7 +122,7 @@ const Post = ({ data, location }) => {
                                     }).format(new Date(post.published_at))}
                                 </div>
 
-                                {/* <div className="content-tags">
+                                <div className="content-tags">
                                     {public_tags.map((tag, i) => ( 
                                             <a href={`/tag/${tag.slug}`} title={tag.meta_title} key={i}>
                                                 {tag.name}
@@ -129,14 +132,14 @@ const Post = ({ data, location }) => {
                                     {gameCategoryTags.map((tag) => (
                                         <a className="game-category" id={tag.slug} key={tag.slug} href={`/tag/${tag.slug}/`}>{tag.name}</a>
                                     ))}
-                                </div> */}
+                                </div>
                             </div>   
 
                             {/* The main post content */ }
                             <section
                                 className="content-body load-external-scripts">
 
-                                {/* {
+                                {
                                     withoutGameData === undefined &&
                                     gamesData.map(({ node }) => {
                                         let gameDataSlug = node.slug;
@@ -145,7 +148,7 @@ const Post = ({ data, location }) => {
 
                                         return <GameDataCard data={node} partner={partner?.node} page={page} key={node.gameId} />
                                     })
-                                } */}
+                                }
 
                                 <div className={ withoutGameData === undefined ? 'content-body-text has-game-data' : `content-body-text`} dangerouslySetInnerHTML={{ __html: post.html }}/>
                             </section>
@@ -182,7 +185,6 @@ const Post = ({ data, location }) => {
                                 gamesData.map(({ node }) => {
                                     let gameDataSlug = node.slug;
                                     let page = relatedFeaturedPages.find(p => p.node.slug === gameDataSlug);
-
                                     return <GameDataCard data={node} page={page} key={node.bggId} />
                                 })
                             }
@@ -219,17 +221,30 @@ Post.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         allGhostPage: PropTypes.object.isRequired,
-        //allInternalGameData: PropTypes.object.isRequired,
-        //allInternalGameCollection: PropTypes.object.isRequired,
-        //allGoogleSheetPartnersRow: PropTypes.object
+        allInternalGameData: PropTypes.object.isRequired,
+        allInternalGameCollection: PropTypes.object.isRequired,
+        allGoogleSheetPartnersRow: PropTypes.object
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
 
+// allGhostPost(
+//     sort: { order: DESC, fields: [published_at] },
+//     limit: 3,
+//     filter: { slug: { ne: $slug }, tags: {elemMatch: {slug: {in: $tags } }}}
+// ) {
+//   edges {
+//     node {
+//         ...GhostPostCoreFields
+//         ...GatsbyImageSharpSinglePost
+//     }
+//   }
+// }
+
 export default Post
 
 export const postQuery = graphql`
-    query($slug: String!, $tags: [String!], $bggIdTags: [String]) {
+    query($slug: String!, $tags: [String!], $bggIdTags: [String], $bggIds: [Int]) {
         ghostPost(slug: { eq: $slug }) {
             ...GhostPostFields
             localFeatureImage {
@@ -250,15 +265,15 @@ export const postQuery = graphql`
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
-            limit: 100,
+            limit: 3,
             filter: { slug: { ne: $slug }, tags: {elemMatch: {slug: {in: $tags } }}}
         ) {
-          edges {
+        edges {
             node {
                 ...GhostPostCoreFields
                 ...GatsbyImageSharpSinglePost
             }
-          }
+        }
         }
         allGhostPage(
             sort: { order: ASC, fields: [title] },
@@ -269,6 +284,53 @@ export const postQuery = graphql`
                     ...GhostPageFields
                     ...GatsbyImageSharpSinglePage
                 }
+            }
+        }
+        allInternalGameData(filter: {bggId: {in: $bggIds }}) {
+            edges {
+            node {
+                bggId
+                slug
+                title
+                minPlayers
+                maxPlayers
+                minTime
+                maxTime
+                age
+                bggRating
+                complexity
+            }
+            }
+        }
+        allInternalGameCollection(filter: {gameId: {in: $bggIds }}) {
+            edges {
+                node {
+                    averageRating
+                    bggRating
+                    gameId
+                    id
+                    image
+                    thumbnail
+                    rating
+                    rank
+                    playingTime
+                    owned
+                    numPlays
+                    isExpansion
+                    maxPlayers
+                    minPlayers
+                    name
+                    yearPublished
+                }
+            }
+        }
+        allGoogleSheetPartnersRow {
+            edges {
+            node {
+                link
+                name
+                slug
+            }
             }
         }
     }
