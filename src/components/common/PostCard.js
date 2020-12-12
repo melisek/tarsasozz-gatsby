@@ -4,34 +4,37 @@ import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
 import Img from 'gatsby-image'
 
-const PostCard = ({ post, featured }) => {
+const PostCard = ({ post, featured, onlyImage }) => {
     const url = `/${post.slug}/`
 
     const featuredImage = post.localFeatureImage.childImageSharp.fluid;
 
     return (
-        <Link to={url} className="post-card">
+        <Link to={url} className={onlyImage ? "post-card only-image" : "post-card"}>
             <header className="post-card-header">
 
                 {
                     post.feature_image &&
                     <div className="post-card-image"><Img fluid={featuredImage} alt={post.title} /></div>
                 }
-                <div className="post-card-head">
-                    
-                    <div className="post-card-tags">
-                        { post.tags && <Tags post={post} visibility="public" autolink={false} /> }
-                        <span className="post-card-date">
-                            {new Intl.DateTimeFormat("hu-HU", {
-                                        year: "numeric",
-                                        month: "2-digit",
-                                        day: "2-digit"
-                            }).format(new Date(post.published_at))}
-                        </span>
+                {
+                   !onlyImage &&
+                    <div className="post-card-head">
+                        
+                        <div className="post-card-tags">
+                            { post.tags && <Tags post={post} visibility="public" autolink={false} /> }
+                            <span className="post-card-date">
+                                {new Intl.DateTimeFormat("hu-HU", {
+                                            year: "numeric",
+                                            month: "2-digit",
+                                            day: "2-digit"
+                                }).format(new Date(post.published_at))}
+                            </span>
+                        </div>
+                        
+                        <h2 className="post-card-title">{post.title}</h2>
                     </div>
-                    
-                    <h2 className="post-card-title">{post.title}</h2>
-                </div>
+                }
             </header>
             {
                 featured

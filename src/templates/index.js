@@ -14,9 +14,9 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Index = ({ data, location, pageContext }) => {
-
     const featuredPost = data.ghostPost
-    const posts = data.allGhostPost.edges
+    const posts = data.allposts.edges
+    const listPosts = data.listposts.edges
 
     return (
         <>
@@ -39,6 +39,16 @@ const Index = ({ data, location, pageContext }) => {
                     <Pagination pageContext={pageContext} />
                 </div>
 
+                <div className="container list-post-list">
+                    <h2 className="home-title">(Le)Játszási lista</h2>
+                    <section className="post-feed">
+                        {listPosts.map(({ node }) => (
+                            // The tag below includes the markup for each post - components/common/PostCard.js
+                            <PostCard key={node.id} post={node} onlyImage={true} />
+                        ))}
+                    </section>
+                </div>
+
                 <PageList />
 
                 <MostPlayedList />
@@ -49,7 +59,8 @@ const Index = ({ data, location, pageContext }) => {
 
 Index.propTypes = {
     data: PropTypes.shape({
-        allGhostPost: PropTypes.object.isRequired,
+        allposts: PropTypes.object.isRequired,
+        listposts: PropTypes.object.isRequired,
         ghostPost: PropTypes.object.isRequired
     }).isRequired,
     location: PropTypes.shape({
@@ -64,7 +75,7 @@ export default Index
 // The `limit` and `skip` values are used for pagination
 export const pageQuery = graphql`
   query GhostPostQuery($limit: Int!, $skip: Int!, $homePageTags: [String]) {
-    allGhostPost(
+    allposts: allGhostPost(
         sort: { order: DESC, fields: [published_at] },
         filter: { featured: {eq: false}, tags: {elemMatch: {slug: { in: $homePageTags }}}},
         limit: $limit,
@@ -72,7 +83,19 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-          ...GhostPostFields
+          ...GhostPostCoreFields
+          ...GatsbyImageSharpPostCard
+        }
+      }
+    }
+    listposts: allGhostPost(
+        sort: { order: DESC, fields: [published_at] },
+        filter: { tags: {elemMatch: {slug: { eq: "tarsasjatek-lista" }}} },
+        limit: 3
+    ) {
+      edges {
+        node {
+          ...GhostPostCoreFields
           ...GatsbyImageSharpPostCard
         }
       }

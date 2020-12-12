@@ -1606,6 +1606,10 @@ section.play-card-content {
     overflow: hidden;
 }
 
+.post-card.only-image .post-card-image {
+    border-radius: 8px;
+}
+
 .post-card-footer {
     display: flex;
     align-items: center;
@@ -1649,7 +1653,7 @@ section.play-card-content {
     width: 26px;
 }
 
-.page-list, .play-list {
+.page-list, .play-list, .list-post-list {
     background-color: #fff;
     border-top: 1px solid #e5eff5;
     border-bottom: 1px solid #e5eff5;
@@ -1661,6 +1665,11 @@ section.play-card-content {
 
 .page-list {
     background: var(--color-purple);
+}
+
+.list-post-list {
+    background: none;
+    padding-top: 0;
 }
 
 .featured-page-card {
