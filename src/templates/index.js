@@ -39,15 +39,18 @@ const Index = ({ data, location, pageContext }) => {
                     <Pagination pageContext={pageContext} />
                 </div>
 
-                <div className="container list-post-list">
-                    <h2 className="home-title">(Le)Játszási lista</h2>
-                    <section className="post-feed">
-                        {listPosts.map(({ node }) => (
-                            // The tag below includes the markup for each post - components/common/PostCard.js
-                            <PostCard key={node.id} post={node} onlyImage={true} />
-                        ))}
-                    </section>
-                </div>
+                {
+                    listPosts && listPosts.length > 0 &&
+                    <div className="container list-post-list">
+                        <h2 className="home-title">(Le)Játszási lista</h2>
+                        <section className="post-feed">
+                            {listPosts.map(({ node }) => (
+                                // The tag below includes the markup for each post - components/common/PostCard.js
+                                <PostCard key={node.id} post={node} onlyImage={true} />
+                            ))}
+                        </section>
+                    </div>
+                }
 
                 <PageList />
 
