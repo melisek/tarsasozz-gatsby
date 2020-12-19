@@ -668,6 +668,7 @@ h6 {
     display: grid;
     grid-template-columns: repeat(4,1fr);
     font-size: .7em;
+    margin: 1em 0;
 }
 
 .game-list.game-data-grid .game-icon {
@@ -717,6 +718,18 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     margin-top: 1em;
 }
 
+.splide__slide > figure.kg-card.kg-image-card {
+    margin-bottom: 0!important;
+}
+
+.splide__arrow {
+    background:var(--color-purple);
+    padding: .25em;
+}
+
+.splide__pagination__page.is-active {
+    background: var(--color-purple);
+}
 .kg-bookmark-container {
     display: flex;
     color: var(--color-base);

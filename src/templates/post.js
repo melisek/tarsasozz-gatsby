@@ -85,12 +85,6 @@ const Post = ({ data, location }) => {
             />
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
-                <script type="text/javascript">
-                    {`var zoomConfig = {background: '#efeffd'};
-                    mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig);
-                    `}
-                </script>
-                
             </Helmet>
 
             <Layout>
@@ -205,7 +199,6 @@ const Post = ({ data, location }) => {
                         : null
                     }
                 </div>
-
             </Layout>
         </>
     )
