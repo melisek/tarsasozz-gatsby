@@ -85,6 +85,12 @@ const Post = ({ data, location }) => {
             />
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
+                <script defer={true}>
+                    {`
+                        var zoomConfig = {background: '#efeffd'};
+                        mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig);
+                    `}
+                </script>
             </Helmet>
 
             <Layout>

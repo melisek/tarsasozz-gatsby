@@ -27,13 +27,16 @@ export const onRenderBody = (
     defer={true}
     dangerouslySetInnerHTML={{
       __html: `
-      setTimeout(function() {
-          new Splide( '#image-slider' ).mount();
-          var zoomConfig = {background: '#efeffd'};
-          mediumZoom(document.querySelectorAll(".kg-image"), zoomConfig);
+        setTimeout(function() {
+          if(document.getElementById('image-slider') !== undefined)
+          {
+            new Splide( '#image-slider', {
+                gap: '1.75em'
+              } ).mount(); 
+          }
         }, 4000)
     `,
     }}
-  />,
+  />
   ])
 }
