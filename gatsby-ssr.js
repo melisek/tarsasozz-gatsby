@@ -34,7 +34,7 @@ export const onRenderBody = (
                 gap: '1.75em'
               } ).mount(); 
           }
-        }, 4000)
+        }, 5000)
     `,
     }}
   />
