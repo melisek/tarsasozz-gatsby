@@ -1005,7 +1005,7 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
 }
 
 .icon-rating {
-    background: #ddddf3 url(http://localhost:8000/images/star-solid.svg) no-repeat center center;
+    background: #ddddf3 url(/images/star-solid.svg) no-repeat center center;
     background-size: 1.5em;
     border-radius: 1em;
 }
