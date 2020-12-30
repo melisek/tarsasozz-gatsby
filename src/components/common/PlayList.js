@@ -9,7 +9,6 @@ import '../../styles/app.css'
 
 const PlayList = ({ data }) => {
     const plays = data.allInternalMostPlayedGames.edges
-    const games = data.allInternalGameData.edges
     const pages = data.allGhostPage.edges
 
     return (
@@ -19,12 +18,10 @@ const PlayList = ({ data }) => {
                 <section className="play-feed">
                     {plays.map(({ node, i }) => {
                             let playGameId = node.gameId;
-                            let game = games.find(({ node }) => node.bggId === playGameId);
-                            let page = game !== undefined && game !== null 
-                                ? pages.find(p => p.node.slug === game.node.slug)
-                                : null;
+                            // TODO
+                            let page = null;
                             
-                            return <PlayCard play={node} page={page} key={i} title={game?.node?.title} /> //
+                            return <PlayCard play={node} page={page} key={i} />
                     })}
                 </section>
             </div>
@@ -35,7 +32,6 @@ const PlayList = ({ data }) => {
 PlayList.propTypes = {
     data: PropTypes.shape({
         allInternalMostPlayedGames: PropTypes.object.isRequired,
-        allInternalGameData: PropTypes.object.isRequired,
         allGhostPage: PropTypes.object.isRequired,
     }).isRequired,
 }
@@ -52,15 +48,6 @@ const PlayListQuery = props => (
                         image
                         thumbnail
                         playDate
-                      }
-                    }
-                }
-                allInternalGameData {
-                    edges {
-                      node {
-                        bggId
-                        slug
-                        title
                       }
                     }
                 }

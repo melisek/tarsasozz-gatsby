@@ -99,10 +99,10 @@ module.exports = {
                             url: `${process.env.BGG_API_URL}mostplayed/${process.env.BGG_API_USERNAME}/`,
                             name: `mostPlayedGames`
                         },
-                        {
-                            url: `https://tarsasozz-wizard.azurewebsites.net/wizard/list`,
-                            name: `gameData`
-                        },
+                        // {
+                        //     url: `https://tarsasozz-wizard.azurewebsites.net/wizard/list`,
+                        //     name: `gameData`
+                        // },
                         {  
                             url: `${process.env.BGG_API_URL}collection/${process.env.BGG_API_USERNAME}/`,
                             name: `gameCollection`

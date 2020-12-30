@@ -9,8 +9,7 @@ import PlayCard from '../components/common/PlayCard'
 import { MetaData } from '../components/common/meta'
 import Img from 'gatsby-image'
 
-import { Cog, Cogs } from 'styled-icons/fa-solid'
-import { Cogs as IcoCogs } from 'styled-icons/icomoon' 
+import { CalendarAlt } from 'styled-icons/fa-regular'
 
 /**
 * Single page (/:slug)
@@ -24,9 +23,7 @@ const Page = ({ data, location }) => {
     const featuredImage = data.ghostPage.localFeatureImage ? data.ghostPage.localFeatureImage.childImageSharp.fluid : null;
 
     //const plays = data.allInternalPlays.edges
-    const games = data.allInternalGameData.edges
-
-    const complexity = [ "Könnyű", "Normál", "Nehéz"];
+    const games = data.allInternalGameCollection.edges
 
     return (
         <>
@@ -55,23 +52,16 @@ const Page = ({ data, location }) => {
                                             ))}
 
                                         <h1 className="content-title">{page.title}</h1>
+                                        <h2 className="content-subtitle">{node.originalName}</h2>
 
                                         <p className="game-excerpt">{page.excerpt}</p>
 
                                         <div className="game-data-grid">
                                             <div>
                                                 <div className="game-icon icon-complexity" aria-hidden="true">
-                                                    {
-                                                    node.complexity === 1 ?
-                                                        <Cog size="1.25em" />
-                                                    : (node.complexity === 2 ?
-                                                        <IcoCogs size="1.25em" />
-                                                        :
-                                                        <Cogs size="1.25em" />
-                                                    )
-                                                    }
+                                                    <CalendarAlt size="1.25em" />
                                                 </div>
-                                                <span className="game-data">{complexity[node.complexity - 1]}</span>
+                                                <span className="game-data">{node.yearPublished}</span>
                                             </div>
                                             <div>
                                                 <div className="game-icon icon-players" aria-hidden="true"></div>
@@ -79,11 +69,11 @@ const Page = ({ data, location }) => {
                                             </div>
                                             <div>
                                                 <div className="game-icon icon-time" aria-hidden="true"></div>
-                                                <span className="game-data">{node.minTime}{ node.maxTime != null ? `-${node.maxTime}` : null } perc játékidő</span>
+                                                <span className="game-data">{node.minPlayTime}{ node.maxPlayTime != null ? `-${node.maxPlayTime}` : null } perc játékidő</span>
                                             </div>
                                             <div>
-                                                <div className="game-icon icon-age" aria-hidden="true"></div>
-                                                <span className="game-data">{node.age}+ éves kortól</span>
+                                                <div className="game-icon icon-rating" aria-hidden="true"></div>
+                                                <span className="game-data">{ node.rating !== null && node.rating > 0 ? `${node.rating}/10 | ` : null }<a href={`https://boardgamegeek.com/boardgame/${node.gameId}/`} target="_blank">BGG átlag: {node.averageRating.toFixed(2)}</a></span>
                                            </div>
                                         </div>
                                         </div>
@@ -162,7 +152,7 @@ Page.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         allInternalPlays: PropTypes.object.isRequired,
-        allInternalGameData: PropTypes.object.isRequired,
+        allInternalGameCollection: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -204,21 +194,31 @@ export const postQuery = graphql`
             }
           }
         }
-        allInternalGameData(filter: {bggId: {eq: $bggId }}) {	
-            edges {	
-              node {	
-                bggId	
-                slug	
-                title	
-                minPlayers	
-                maxPlayers	
-                minTime	
-                maxTime	
-                age	
-                bggRating	
-                complexity	
-              }	
-            }	
+        allInternalGameCollection(filter: {gameId: {eq: $bggId }}) {
+            edges {
+                node {
+                    averageRating
+                    bggRating
+                    gameId
+                    id
+                    image
+                    thumbnail
+                    rating
+                    rank
+                    playingTime
+                    minPlayTime
+                    maxPlayTime
+                    owned
+                    numPlays
+                    isExpansion
+                    maxPlayers
+                    minPlayers
+                    name
+                    originalName
+                    yearPublished
+                }
+            }
         }
+
     }
 `

@@ -220,7 +220,6 @@ Post.propTypes = {
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
         allGhostPage: PropTypes.object.isRequired,
-        allInternalGameData: PropTypes.object.isRequired,
         allInternalGameCollection: PropTypes.object.isRequired,
         allGoogleSheetPartnersRow: PropTypes.object
     }).isRequired,
@@ -285,22 +284,7 @@ export const postQuery = graphql`
                 }
             }
         }
-        allInternalGameData(filter: {bggId: {in: $bggIds }}) {
-            edges {
-            node {
-                bggId
-                slug
-                title
-                minPlayers
-                maxPlayers
-                minTime
-                maxTime
-                age
-                bggRating
-                complexity
-            }
-            }
-        }
+
         allInternalGameCollection(filter: {gameId: {in: $bggIds }}) {
             edges {
                 node {

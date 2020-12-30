@@ -900,6 +900,9 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     font-size: 5rem;
     font-family: var(--font-sans-serif);
 }
+.content-subtitle {
+    margin-bottom: 1.5em;
+}
 @media (max-width: 500px) {
     .content-title {
         margin: 0.8em 0;
@@ -908,6 +911,9 @@ figure.kg-card-hascaption > figcaption, .kg-gallery-card figcaption {
     .content {
         font-size: 1.75rem;
         line-height: 1.8em;
+    }
+    .content-subtitle {
+        margin-bottom: 1em;
     }
 }
 
