@@ -65,11 +65,11 @@ const Page = ({ data, location }) => {
                                             </div>
                                             <div>
                                                 <div className="game-icon icon-players" aria-hidden="true"></div>
-                                                <span className="game-data">{node.minPlayers}-{node.maxPlayers} játékos</span>
+                                                <span className="game-data">{node.minPlayers}{ node.maxPlayers != null && node.minPlayers !== node.maxPlayers ? `-${node.maxPlayers}` : null } játékos</span>
                                             </div>
                                             <div>
                                                 <div className="game-icon icon-time" aria-hidden="true"></div>
-                                                <span className="game-data">{node.minPlayTime}{ node.maxPlayTime != null ? `-${node.maxPlayTime}` : null } perc játékidő</span>
+                                                <span className="game-data">{node.minPlayTime}{ node.maxPlayTime != null && node.minPlayTime !== node.maxPlayTime ? `-${node.maxPlayTime}` : null } perc játékidő</span>
                                             </div>
                                             <div>
                                                 <div className="game-icon icon-rating" aria-hidden="true"></div>
