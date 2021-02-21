@@ -28,7 +28,8 @@ export const onRenderBody = (
     dangerouslySetInnerHTML={{
       __html: `
         setTimeout(function() {
-          if(document.getElementById('image-slider') !== undefined)
+          var slider = document.getElementById('image-slider');
+          if(slider !== null && slider !== undefined)
           {
             new Splide( '#image-slider', {
                 gap: '1.75em'
