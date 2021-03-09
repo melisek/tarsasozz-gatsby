@@ -151,7 +151,7 @@ Page.propTypes = {
             feature_image: PropTypes.string,
         }).isRequired,
         allGhostPost: PropTypes.object.isRequired,
-        allInternalPlays: PropTypes.object.isRequired,
+        //allInternalPlays: PropTypes.object.isRequired,
         allInternalGameCollection: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
